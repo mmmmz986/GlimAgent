@@ -40,11 +40,44 @@ def render_parse_result(entries: list[LogEntry], encoding: str, parsed_json: str
 
 # 질문 입력 화면 렌더링(질문, 분석 버튼)
 def render_analysis_input():
-    question = st.text_input("QUESTION", placeholder="예: 로그 분석해줘.")
+    if "analysis_running" not in st.session_state:
+        st.session_state.analysis_running = False
 
-    requested = st.button("Analyze")
+    question = st.text_input(
+        "QUESTION",
+        placeholder="예: 로그 분석해줘.",
+        key="analysis_question",
+        disabled=st.session_state.analysis_running,
+    )
 
-    return question, requested
+    def start_analysis():
+        st.session_state.analysis_running = True
+        st.session_state.analysis_requested = True
+        st.session_state.pop("analysis_result", None)
+
+    def stop_analysis():
+        st.session_state.analysis_running = False
+        st.session_state.analysis_stopped = True
+
+    analyze_column, stop_column = st.columns(2)
+    with analyze_column:
+        st.button(
+            "Analyze",
+            disabled=st.session_state.analysis_running,
+            on_click=start_analysis,
+            use_container_width=True,
+        )
+    with stop_column:
+        st.button(
+            "Stop Analyze",
+            disabled=not st.session_state.analysis_running,
+            on_click=stop_analysis,
+            use_container_width=True,
+        )
+
+    requested = st.session_state.pop("analysis_requested", False)
+    stopped = st.session_state.pop("analysis_stopped", False)
+    return question, requested, stopped
 
 # 분석 결과 화면 렌더링
 def analysis_progress():
@@ -52,6 +85,53 @@ def analysis_progress():
 def render_analysis_result(content):
     st.subheader("RESULT ANALYSIS")
     st.write(content)
+
+
+def render_analysis_stream(chunks):
+    """Render model chunks as they arrive and return the completed text."""
+    st.subheader("RESULT ANALYSIS")
+    output = st.empty()
+    content = ""
+    for chunk in chunks:
+        part = chunk.content
+        if isinstance(part, str):
+            content += part
+        elif isinstance(part, list):
+            content += "".join(
+                item.get("text", "") for item in part if isinstance(item, dict)
+            )
+        output.markdown(content + "▌")
+    output.markdown(content)
+    return content
+
+
+def stored_analysis_result():
+    return st.session_state.get("analysis_result")
+
+
+def finish_analysis(content=None):
+    st.session_state.analysis_running = False
+    if content:
+        st.session_state.analysis_result = content
+
+
+def queue_notice(level, message):
+    st.session_state.analysis_notice = (level, message)
+
+
+def render_notice():
+    notice = st.session_state.pop("analysis_notice", None)
+    if notice is None:
+        return
+    level, message = notice
+    if level == "error":
+        st.error(message)
+    else:
+        st.warning(message)
+
+
+def rerun():
+    st.rerun()
 
 # 오류/경고 메시지 화면 렌더링
 def show_error(message: str):
