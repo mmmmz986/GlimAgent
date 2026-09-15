@@ -8,12 +8,18 @@
             "name": "Streamlit Debug",
             "type": "debugpy",
             "request": "launch",
+            "python": "${workspaceFolder}/.venv/Scripts/python.exe",
             "module": "streamlit",
             "args": [
                 "run",
-                "app.py"
+                "${workspaceFolder}/MAIN/main.py"
             ],
-            "console": "integratedTerminal"
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": true
         }
     ]
 }
