@@ -1,0 +1,36 @@
+# <개발환경>
+
+
+1. Python
+---
+
+* ###### 3.13.15 설치
+
+## 2\. VS code
+
+* ###### 확장팩 : python, pylance
+
+## 3\. Git
+
+## 4\. Ollama
+
+## 4.1 Model
+
+* ###### ollama pull qwen3:8b
+* ###### ollama run qwen3:8b
+* ###### 대화되는지 확인
+
+## 5\. 가상환경
+
+* ###### cd clone 폴더
+* ###### python -m venv .venv
+* ###### .venv\\Scripts\\activate
+* ###### pip install -r requirements.txt
+
+## 6\. 설치파일
+
+* ###### pip install streamlit
+* ###### pip install langchain
+* ###### pip install langchain-ollama
+
+
