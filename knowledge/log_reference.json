@@ -1,0 +1,5343 @@
+{
+  "schema_version": 1,
+  "source_file": "시스템로그 및 알람로그 정리본.xlsx",
+  "source_sha256": "3167da72fe48e953f97f1e4d12ff6e4c338db77249c765e5b42da417c4abffab",
+  "source_notes": {
+    "시스템로그": "2026-09-10 기준 · 기능별 분류 및 정렬 · 노란색: 내용 수정 / 연녹색: 추가 / 회색: 기존 미출력·중복 항목",
+    "알람로그": "기능별 알람 분류 · PD/BM 구분 유지 · 같은 종류끼리 정렬"
+  },
+  "usage_notes": [
+    "로그 종류와 코드로 후보를 찾고 메시지 문구를 함께 비교한다. 코드만으로 의미를 확정하지 않는다.",
+    "category와 code는 심각도를 뜻하지 않는다. 원본에 없는 원인이나 해결방법은 추정하여 채우지 않았다.",
+    "message_template은 원본 문구이며 정규식이 아니다. printf 자리표시자와 START/END 등의 설명 표기가 포함될 수 있다.",
+    "reference_only 항목은 원본에서 기존 미출력 / 중복으로 분류한 참고 자료다.",
+    "example에 구버전 또는 언어별 문구가 있을 수 있으므로 실제 로그와 함께 확인한다.",
+    "source_note의 코드 근거는 제공 문서의 기재 내용이며 실제 소스 코드와 대조 검증하지 않았다."
+  ],
+  "counts": {
+    "system": 235,
+    "system_developer": 18,
+    "alarm": 27
+  },
+  "entries": [
+    {
+      "id": "system:1",
+      "log_type": "system",
+      "source_index": "1",
+      "category": "INFO",
+      "code": "0",
+      "message_template": "[INFO] Program Start Server(Master) Ver.%s",
+      "tags": [
+        "INFO"
+      ],
+      "description": "프로그램 시작 시 현재 버전 문자열 기록. 버전은 실행 파일에 따라 달라짐.",
+      "example": "Server(Master) Ver.<실행 버전>",
+      "recommended_action": null,
+      "source_note": "수정 · SlideInsDlg.cpp:789",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 3
+      }
+    },
+    {
+      "id": "system:31",
+      "log_type": "system",
+      "source_index": "31",
+      "category": "INFO",
+      "code": "1000",
+      "message_template": "[INFO] Press Manually Inspect Start Button",
+      "tags": [
+        "INFO"
+      ],
+      "description": "사용자가 검사 시작 버튼을 수동으로 누름. 자동 시작과 구분.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · SlideInsDlg.cpp:2896",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 4
+      }
+    },
+    {
+      "id": "system:2",
+      "log_type": "system",
+      "source_index": "2",
+      "category": "INFO",
+      "code": "1000",
+      "message_template": "[INFO] Press Manually Inspect Stop Button",
+      "tags": [
+        "INFO"
+      ],
+      "description": "사용자가 검사 정지 버튼을 수동으로 누름. 자동 종료와 구분.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "설명 수정 · SlideInsDlg.cpp:2867",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 5
+      }
+    },
+    {
+      "id": "system:3",
+      "log_type": "system",
+      "source_index": "3",
+      "category": "INFO",
+      "code": "50",
+      "message_template": "[INFO] Press Button Manual Time Sync Sent",
+      "tags": [
+        "INFO"
+      ],
+      "description": "수동 시간 동기화 버튼으로 서버 시간 전송 요청.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgHiddenSetting.cpp:359",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 6
+      }
+    },
+    {
+      "id": "system:10",
+      "log_type": "system",
+      "source_index": "10",
+      "category": "INFO",
+      "code": "4",
+      "message_template": "[INFO] Save Model %s Parameter",
+      "tags": [
+        "INFO"
+      ],
+      "description": "모델 파라미터를 다른 이름으로 저장했을 때 모델명 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgParamSetting.cpp:906",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 7
+      }
+    },
+    {
+      "id": "system:12",
+      "log_type": "system",
+      "source_index": "12",
+      "category": "INFO",
+      "code": "999",
+      "message_template": "[INFO] 'ClearMemory.exe' does not exist.",
+      "tags": [
+        "INFO"
+      ],
+      "description": "ClearMemory 실행 파일이 없어 실행할 수 없음.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · SlideInsDlg.cpp:4250",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 8
+      }
+    },
+    {
+      "id": "system:13",
+      "log_type": "system",
+      "source_index": "13",
+      "category": "PLC",
+      "code": "502",
+      "message_template": "[PLC] LotID Changed to %s.",
+      "tags": [
+        "PLC"
+      ],
+      "description": "PLC Lot ID 변경 감지. 사이트 경로에 따라 단일 Lot ID 또는 두 Lot ID(%s,%s)를 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "보완 · DlgSystemIO.cpp:15765 / DlgOpcView.cpp:518",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 9
+      }
+    },
+    {
+      "id": "system:14",
+      "log_type": "system",
+      "source_index": "14",
+      "category": "PLC",
+      "code": "700",
+      "message_template": "[PLC] OPC UA Connect Success : %s",
+      "tags": [
+        "PLC"
+      ],
+      "description": "OPC UA 신규 연결 성공 시 노드 ID와 함께 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "수정 · DlgOpcView.cpp:162",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 10
+      }
+    },
+    {
+      "id": "system:15",
+      "log_type": "system",
+      "source_index": "15",
+      "category": "PLC",
+      "code": "700",
+      "message_template": "[PLC] OPC UA Connect Failed : %s",
+      "tags": [
+        "PLC"
+      ],
+      "description": "OPC UA 연결 실패로 연결 상태가 실패로 바뀌는 분기에서 기록. 반복 실패마다 반드시 출력되는 것은 아님.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "수정 · DlgOpcView.cpp:149",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 11
+      }
+    },
+    {
+      "id": "system:16",
+      "log_type": "system",
+      "source_index": "16",
+      "category": "PLC",
+      "code": "700",
+      "message_template": "[PLC] OPC UA Connect Lost : %s",
+      "tags": [
+        "PLC"
+      ],
+      "description": "OPC UA Read/Write 중 연결 상실 감지 시 노드 ID와 함께 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "수정 · DlgOpcView.cpp:176",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 12
+      }
+    },
+    {
+      "id": "system:17",
+      "log_type": "system",
+      "source_index": "17",
+      "category": "PLC",
+      "code": "502",
+      "message_template": "[PLC] Model Changed to %s",
+      "tags": [
+        "PLC"
+      ],
+      "description": "PLC 모델 코드 변경으로 변경된 모델명 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgOpcView.cpp:260",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 13
+      }
+    },
+    {
+      "id": "system:19",
+      "log_type": "system",
+      "source_index": "19",
+      "category": "PLC",
+      "code": "502",
+      "message_template": "[PLC] LotID initialized to %s,%s.",
+      "tags": [
+        "PLC"
+      ],
+      "description": "프로그램 최초 PLC Lot ID 읽기. Lot Change 처리 없이 초기값만 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:4292",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 14
+      }
+    },
+    {
+      "id": "system:24",
+      "log_type": "system",
+      "source_index": "24",
+      "category": "PLC",
+      "code": "103",
+      "message_template": "[PLC] Coating Signal / Top %d -> %d / Back %d -> %d / Speed : %.1f / RW : %.1f",
+      "tags": [
+        "PLC"
+      ],
+      "description": "Top/Back 코팅 상태가 이전 로그 값과 달라졌을 때 기록. 이전→현재 값, PLC 속도 및 RW 미터 포함. 일반 시작/종료 지연 설정 전에 호출.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:7163",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 15
+      }
+    },
+    {
+      "id": "system:25",
+      "log_type": "system",
+      "source_index": "25",
+      "category": "INSPECT",
+      "code": "102",
+      "message_template": "[INSPECT][Start Timer] 150.00m ÷ (80.0m/min ÷ 60) + 5s = 117s → Starts in 117s",
+      "tags": [
+        "INSPECT",
+        "Start Timer"
+      ],
+      "description": "[시작 1] 코팅 시작 조건 만족 → 시작 지연 타이머 설정.\n총 지연(초)=Pos/(RollSpeed/60)+DelayTime. 정수 초로 변환하고 음수는 0 처리.\nPos=설비 거리(m), RollSpeed=PLC 속도(m/min), DelayTime=시작 오프셋(초). 초기 Skip 거리와 별개.",
+      "example": "(Start Flag) Pos : 70.00, RollSpeed : 43.0, DelayTime : 30, Total DelayTime : 127",
+      "recommended_action": null,
+      "source_note": "수정 · DlgSystemIO.cpp:7169,15624",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 16
+      }
+    },
+    {
+      "id": "system:26",
+      "log_type": "system",
+      "source_index": "26",
+      "category": "INSPECT",
+      "code": "102",
+      "message_template": "[INSPECT][Timer Complete] Start Signal %.1fm + SkipMeter %.1fm = Real Start %.1fm",
+      "tags": [
+        "INSPECT",
+        "Timer Complete"
+      ],
+      "description": "[시작 2] 시작 지연 만료 → 검사 ON 및 초기 Skip 기준 설정.\nStart Signal M=타이머 만료 시점의 RW 미터(PLC 신호 수신 미터 아님).\nReal Start M=기준 RW+설정 Skip 거리. 실제 판정은 Skip 완료 이후.",
+      "example": "Auto Start Flag Inspect Start(Start Signal M : 9.8 / Real Start M : 139.8)",
+      "recommended_action": null,
+      "source_note": "수정 · DlgSystemIO.cpp:1328",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 17
+      }
+    },
+    {
+      "id": "system:28",
+      "log_type": "system",
+      "source_index": "28",
+      "category": "INSPECT",
+      "code": "102",
+      "message_template": "[INSPECT][Skip Complete] Inspect Start !! R/W Distance : %.1fm",
+      "tags": [
+        "INSPECT",
+        "Skip Complete"
+      ],
+      "description": "[시작 4] RW 미터가 검사 기준+Skip 거리에 도달한 뒤 데이터 수신 시 1회 출력. 이후 데이터 처리·판정 진행.\nWA Lot Change 재Skip 사용 시 별도 재Skip 거리 적용.",
+      "example": "Skip Complete Inspect Start R/W Distance : 139.8",
+      "recommended_action": null,
+      "source_note": "수정 · SlideInsDlg.cpp:4625",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 18
+      }
+    },
+    {
+      "id": "system:29",
+      "log_type": "system",
+      "source_index": "29",
+      "category": "INSPECT",
+      "code": "102",
+      "message_template": "[INSPECT][End Timer] 150.00m ÷ (80.0m/min ÷ 60) − 20.00m ÷ (80.0m/min ÷ 60) − 5s = 92s → Ends in 92s",
+      "tags": [
+        "INSPECT",
+        "End Timer"
+      ],
+      "description": "[종료 1] 코팅 상태 변경 후 Top 또는 Back 중 한 면이라도 OFF이면 종료 지연 설정.\n총 지연(초)=(Pos-AutoStop거리)/(RollSpeed/60)-DelayTime. 정수 초로 변환하고 음수는 0 처리.\n종료 지연 중 검사 ON 유지. 저속 즉시 정지 등 예외 경로는 이 로그 없이 정지 가능.",
+      "example": "(End Flag) Pos : 70.00, RollSpeed : 43.0, DelayTime : 30, Total DelayTime : 53\n예시 조건: AutoStop거리=10m",
+      "recommended_action": null,
+      "source_note": "수정 · DlgSystemIO.cpp:7203,15642",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 19
+      }
+    },
+    {
+      "id": "system:30",
+      "log_type": "system",
+      "source_index": "30",
+      "category": "INSPECT",
+      "code": "102",
+      "message_template": "[INSPECT][Timer Complete] Inspect End!! R/W Distance : %.1fm",
+      "tags": [
+        "INSPECT",
+        "Timer Complete"
+      ],
+      "description": "[종료 2] 종료 지연 만료 → 검사 OFF, Skip 플래그 해제 및 롤맵/마킹 종료 처리. 이후 별도 주기에서 화면 갱신 및 Client OFF 전송.\n현재 InspectStartDlgUpdate(Inspect End) 로그는 없음.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "수정 · DlgSystemIO.cpp:1359 / SlideInsDlg.cpp:2950",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 20
+      }
+    },
+    {
+      "id": "system:32",
+      "log_type": "system",
+      "source_index": "32",
+      "category": "INSPECT",
+      "code": "102",
+      "message_template": "[INSPECT][LotChange][SkipWait] CurRW: %.1fm, Old InspectStartRW: %.1fm, LotChangeSkipMeter: %.1fm",
+      "tags": [
+        "INSPECT",
+        "LotChange",
+        "SkipWait"
+      ],
+      "description": "WA Lot Change 재Skip 타이머 처리 시 현재 RW, 이전 기준 및 재Skip 거리 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:1727",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 21
+      }
+    },
+    {
+      "id": "system:33",
+      "log_type": "system",
+      "source_index": "33",
+      "category": "INSPECT",
+      "code": "102",
+      "message_template": "[INSPECT][LotChange][Start] Start Signal %.1fm + SkipMeter %.1fm = Real Start %.1fm",
+      "tags": [
+        "INSPECT",
+        "LotChange",
+        "Start"
+      ],
+      "description": "Lot Change 재Skip 처리로 검사 기준 미터를 새로 설정. 일반 코팅 시작 타이머와 별도 경로.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:1738",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 22
+      }
+    },
+    {
+      "id": "system:34",
+      "log_type": "system",
+      "source_index": "34",
+      "category": "INSPECT",
+      "code": "102",
+      "message_template": "[INSPECT][ResetDetected] Old Start %.1fm → New Start %.1fm",
+      "tags": [
+        "INSPECT",
+        "ResetDetected"
+      ],
+      "description": "ESST에서 Lot Change 없이 RW가 시작 기준보다 10m 이상 작아져 초기 Skip 기준을 현재 RW로 재설정.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · SlideInsDlg.cpp:4606",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 23
+      }
+    },
+    {
+      "id": "system:41",
+      "log_type": "system",
+      "source_index": "41",
+      "category": "UNWINDER",
+      "code": "102",
+      "message_template": "[UNWINDER][Start Timer] 150.00m ÷ (80.0m/min ÷ 60) + 5s = 117s → Starts in 117s",
+      "tags": [
+        "UNWINDER",
+        "Start Timer"
+      ],
+      "description": "Unwinder 시작 지연 타이머 설정. 별도의 Unwinder 거리/오프셋 사용. 일반 Auto Start와 함께 사용 시 두 준비 조건 확인.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:7224",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 24
+      }
+    },
+    {
+      "id": "system:42",
+      "log_type": "system",
+      "source_index": "42",
+      "category": "UNWINDER",
+      "code": "102",
+      "message_template": "[UNWINDER][Timer Complete] Start Signal 1200.0m + SkipMeter 30.0m = Real Start 1230.0m",
+      "tags": [
+        "UNWINDER",
+        "Timer Complete"
+      ],
+      "description": "Unwinder 시작 지연 만료. Unwinder 준비 플래그 ON 및 초기 Skip 기준 설정.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:1405",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 25
+      }
+    },
+    {
+      "id": "system:43",
+      "log_type": "system",
+      "source_index": "43",
+      "category": "UNWINDER",
+      "code": "102",
+      "message_template": "[UNWINDER][End Timer] 150.00m ÷ (80.0m/min ÷ 60) - 20.00m ÷ (80.0m/min ÷ 60) - 5s = 92s → Ends in 92s",
+      "tags": [
+        "UNWINDER",
+        "End Timer"
+      ],
+      "description": "Unwinder 종료 지연 타이머 설정. 별도의 Unwinder 거리/오프셋 사용. 일반 Auto Start와 함께 사용 시 두 준비 조건 확인.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:7224",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 26
+      }
+    },
+    {
+      "id": "system:44",
+      "log_type": "system",
+      "source_index": "44",
+      "category": "UNWINDER",
+      "code": "102",
+      "message_template": "[UNWINDER][Timer Complete] Inspect End!! R/W Distance : 2450.0m",
+      "tags": [
+        "UNWINDER",
+        "Timer Complete"
+      ],
+      "description": "Unwinder 종료 지연 만료. Unwinder 준비 플래그 OFF 및 롤맵/마킹 종료 처리.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:1425",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 27
+      }
+    },
+    {
+      "id": "system:54",
+      "log_type": "system",
+      "source_index": "54",
+      "category": "UNWINDER",
+      "code": "502",
+      "message_template": "[UNWINDER] Cut Signal : %d",
+      "tags": [
+        "UNWINDER"
+      ],
+      "description": "Unwinder Cut 신호 값 변경 기록. 문구 Siganl은 현재 코드 철자 그대로.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:4325",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 28
+      }
+    },
+    {
+      "id": "system:55",
+      "log_type": "system",
+      "source_index": "55",
+      "category": "MOTION",
+      "code": "400",
+      "message_template": "[MOTION] Client %d Motion Server ON Send",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "Motion 창에서 Servo On 버튼 눌렀을 때 해당 클라이언트 On 송신",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 29
+      }
+    },
+    {
+      "id": "system:56",
+      "log_type": "system",
+      "source_index": "56",
+      "category": "MOTION",
+      "code": "400",
+      "message_template": "[MOTION] Client %d, Motion Server OFF Send (%d)",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "Motion 창 Servo Off 버튼 클릭 시 해당 클라이언트에 OFF 명령 송신.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "설명 수정 · DlgMotionIO.cpp:324",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 30
+      }
+    },
+    {
+      "id": "system:57",
+      "log_type": "system",
+      "source_index": "57",
+      "category": "MOTION",
+      "code": "400",
+      "message_template": "[MOTION] Client %d, Motion Alarm Reset Send (%d)",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "Motion 창에서 Reset 버튼 눌렀을 때 해당 클라이언트에 송신",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 31
+      }
+    },
+    {
+      "id": "system:58",
+      "log_type": "system",
+      "source_index": "58",
+      "category": "MOTION",
+      "code": "400",
+      "message_template": "[MOTION] Client %d, %d Motion Stop Send (%d)",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "Motion 창에서 Stop 버튼 눌렀을 때 모든 클라이언트에 모션 정지 송신",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · DlgMotionIO.cpp:413",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 32
+      }
+    },
+    {
+      "id": "system:59",
+      "log_type": "system",
+      "source_index": "59",
+      "category": "MOTION",
+      "code": "400",
+      "message_template": "[MOTION] Client %d, Model Position Save Send",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "Motion 창에서 Save 버튼 눌렀을 때 모델위치 저장 송신",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · DlgMotionIO.cpp:435",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 33
+      }
+    },
+    {
+      "id": "system:60",
+      "log_type": "system",
+      "source_index": "60",
+      "category": "MOTION",
+      "code": "400",
+      "message_template": "[MOTION] Client %d, %d Move Send",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "Motion 창에서 절대위치 이동 버튼 눌렀을 때 / 해당 클라이언트, 센서",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · DlgMotionIO.cpp:538",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 34
+      }
+    },
+    {
+      "id": "system:61",
+      "log_type": "system",
+      "source_index": "61",
+      "category": "MOTION",
+      "code": "400",
+      "message_template": "[MOTION] Emergency Stopped",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "영역 감지 센서(Area Sensor)가 감지되었을 때 모션 정지 로그",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:369",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 35
+      }
+    },
+    {
+      "id": "system:69",
+      "log_type": "system",
+      "source_index": "69",
+      "category": "MOTION",
+      "code": "401",
+      "message_template": "[MOTION] Absolute Move End Received",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "클라이언트에서 절대 이동 완료 수신",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2642",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 36
+      }
+    },
+    {
+      "id": "system:70",
+      "log_type": "system",
+      "source_index": "70",
+      "category": "MOTION",
+      "code": "401",
+      "message_template": "[MOTION] Relative Move End Received",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "클라이언트에서 상대 이동 완료 수신",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2647",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 37
+      }
+    },
+    {
+      "id": "system:71",
+      "log_type": "system",
+      "source_index": "71",
+      "category": "MOTION",
+      "code": "2402",
+      "message_template": "[MOTION] Motion Home Move Complete!",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "모션 원점이동 완료 로그 남김",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2678",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 38
+      }
+    },
+    {
+      "id": "system:72",
+      "log_type": "system",
+      "source_index": "72",
+      "category": "MOTION",
+      "code": "2403",
+      "message_template": "[MOTION] Motion Home Move Fail!",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "모션 이동 실패 로그 남김",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2698",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 39
+      }
+    },
+    {
+      "id": "system:73",
+      "log_type": "system",
+      "source_index": "73",
+      "category": "MOTION",
+      "code": "402",
+      "message_template": "[MOTION] Stop End Received",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "모션 정지 완료됨 수신",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2707",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 40
+      }
+    },
+    {
+      "id": "system:74",
+      "log_type": "system",
+      "source_index": "74",
+      "category": "MOTION",
+      "code": "402",
+      "message_template": "[MOTION] Servo On End Received",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "서보 On End 수신",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2713",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 41
+      }
+    },
+    {
+      "id": "system:75",
+      "log_type": "system",
+      "source_index": "75",
+      "category": "MOTION",
+      "code": "402",
+      "message_template": "[MOTION] Servo Off End Received",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "서보 Off End 수신",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2719",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 42
+      }
+    },
+    {
+      "id": "system:76",
+      "log_type": "system",
+      "source_index": "76",
+      "category": "MOTION",
+      "code": "402",
+      "message_template": "[MOTION] Alarm Reset End Received",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "알람 리셋 End 수신",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2724",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 43
+      }
+    },
+    {
+      "id": "system:77",
+      "log_type": "system",
+      "source_index": "77",
+      "category": "MOTION",
+      "code": "400",
+      "message_template": "[MOTION] Model Postion Save OK",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "모델 위치 저장 수신",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "코드 수정 · SlideInsDlg.cpp:2728",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 44
+      }
+    },
+    {
+      "id": "system:79",
+      "log_type": "system",
+      "source_index": "79",
+      "category": "MOTION",
+      "code": "403",
+      "message_template": "[MOTION] Client %d, Sensor %d, Lower Motion OFF",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "클라이언트에서 Servo Off 수신 받았을 때 서버에서 한번 더 확인 (하부) / 클라이언트 번호",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 45
+      }
+    },
+    {
+      "id": "system:80",
+      "log_type": "system",
+      "source_index": "80",
+      "category": "MOTION",
+      "code": "403",
+      "message_template": "[MOTION] Client %d, Sensor %d, Upper Motion OFF",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "클라이언트에서 Servo Off 수신 받았을 때 서버에서 한번 더 확인 (상부) / 클라이언트 번호",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · DlgMotionIO.cpp:765",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 46
+      }
+    },
+    {
+      "id": "system:81",
+      "log_type": "system",
+      "source_index": "81",
+      "category": "MOTION",
+      "code": "404",
+      "message_template": "[MOTION] Move Limit (-) End Client 1",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "모션 Limit 위치로 이동시키기 ① -Limit으로 이동 시킬때 클라이언트 첫번째부터 순차적으로 움직임:: 클라1 완료",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:1915",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 47
+      }
+    },
+    {
+      "id": "system:82",
+      "log_type": "system",
+      "source_index": "82",
+      "category": "MOTION",
+      "code": "404",
+      "message_template": "[MOTION] Move Limit (-) End Client 2",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "모션 Limit 위치로 이동시키기 ① -Limit으로 이동 시킬때 클라이언트 첫번째부터 순차적으로 움직임:: 클라2 완료",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:1923",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 48
+      }
+    },
+    {
+      "id": "system:83",
+      "log_type": "system",
+      "source_index": "83",
+      "category": "MOTION",
+      "code": "404",
+      "message_template": "[MOTION] Move Limit (-) End Client 3",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "모션 Limit 위치로 이동시키기 ① -Limit으로 이동 시킬때 클라이언트 첫번째부터 순차적으로 움직임:: 클라3 완료",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:1931",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 49
+      }
+    },
+    {
+      "id": "system:84",
+      "log_type": "system",
+      "source_index": "84",
+      "category": "MOTION",
+      "code": "404",
+      "message_template": "[MOTION] Move Limit (-) End Client 4",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "모션 Limit 위치로 이동시키기 ① -Limit으로 이동 시킬때 클라이언트 첫번째부터 순차적으로 움직임:: 클라4 완료",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:1939",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 50
+      }
+    },
+    {
+      "id": "system:85",
+      "log_type": "system",
+      "source_index": "85",
+      "category": "MOTION",
+      "code": "404",
+      "message_template": "[MOTION] Move Limit (+) End Client 1",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "모션 Limit 위치로 이동시키기 ② +Limit으로 이동 시킬때 클라이언트 마지막부터 순차적으로 움직임:: 클라1 완료",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:1962",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 51
+      }
+    },
+    {
+      "id": "system:86",
+      "log_type": "system",
+      "source_index": "86",
+      "category": "MOTION",
+      "code": "404",
+      "message_template": "[MOTION] Move Limit (+) End Client 2",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "모션 Limit 위치로 이동시키기 ② +Limit으로 이동 시킬때 클라이언트 마지막부터 순차적으로 움직임:: 클라2 완료",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:1968",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 52
+      }
+    },
+    {
+      "id": "system:87",
+      "log_type": "system",
+      "source_index": "87",
+      "category": "MOTION",
+      "code": "404",
+      "message_template": "[MOTION] Move Limit (+) End Client 3",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "모션 Limit 위치로 이동시키기 ② +Limit으로 이동 시킬때 클라이언트 마지막부터 순차적으로 움직임:: 클라3 완료",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:1976",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 53
+      }
+    },
+    {
+      "id": "system:88",
+      "log_type": "system",
+      "source_index": "88",
+      "category": "MOTION",
+      "code": "404",
+      "message_template": "[MOTION] Move Limit (+) End Client 4",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "모션 Limit 위치로 이동시키기 ② +Limit으로 이동 시킬때 클라이언트 마지막부터 순차적으로 움직임:: 클라4 완료",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:1984",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 54
+      }
+    },
+    {
+      "id": "system:89",
+      "log_type": "system",
+      "source_index": "89",
+      "category": "MOTION",
+      "code": "404",
+      "message_template": "[MOTION] Split Move End Client 1",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "모션 Limit 위치로 이동시키기 ③ 중간 기준으로 +-Limit으로 이동 시킬때:: 클라1 완료",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2008",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 55
+      }
+    },
+    {
+      "id": "system:90",
+      "log_type": "system",
+      "source_index": "90",
+      "category": "MOTION",
+      "code": "404",
+      "message_template": "[MOTION] Split Move End Client 2",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "모션 Limit 위치로 이동시키기 ③ 중간 기준으로 +-Limit으로 이동 시킬때:: 클라2 완료",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2014",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 56
+      }
+    },
+    {
+      "id": "system:91",
+      "log_type": "system",
+      "source_index": "91",
+      "category": "MOTION",
+      "code": "404",
+      "message_template": "[MOTION] Split Move End Client 3",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "모션 Limit 위치로 이동시키기 ③ 중간 기준으로 +-Limit으로 이동 시킬때:: 클라3 완료",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2020",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 57
+      }
+    },
+    {
+      "id": "system:92",
+      "log_type": "system",
+      "source_index": "92",
+      "category": "MOTION",
+      "code": "404",
+      "message_template": "[MOTION] Split Move End Client 4",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "모션 Limit 위치로 이동시키기 ③ 중간 기준으로 +-Limit으로 이동 시킬때:: 클라4 완료",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2026",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 58
+      }
+    },
+    {
+      "id": "system:93",
+      "log_type": "system",
+      "source_index": "93",
+      "category": "MOTION",
+      "code": "404",
+      "message_template": "[MOTION] Client: %d, -Limit Move Command Complete",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "서버에서 해당 클라이언트로 -Limit 이동 명령 송신 완료. 이동 완료는 Move Limit (-) End 응답에서 확인.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "방향 설명 수정 · DlgMotionIO.cpp:916",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 59
+      }
+    },
+    {
+      "id": "system:94",
+      "log_type": "system",
+      "source_index": "94",
+      "category": "MOTION",
+      "code": "404",
+      "message_template": "[MOTION] Client: %d, +Limit Move Command Complete",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "서버에서 해당 클라이언트로 +Limit 이동 명령 송신 완료. 이동 완료는 Move Limit (+) End 응답에서 확인.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "방향 설명 수정 · DlgMotionIO.cpp:920",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 60
+      }
+    },
+    {
+      "id": "system:95",
+      "log_type": "system",
+      "source_index": "95",
+      "category": "MOTION",
+      "code": "405",
+      "message_template": "[MOTION] Client Send Motion Home",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "클라이언트에게 원점 이동 명령 내림",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2073",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 61
+      }
+    },
+    {
+      "id": "system:96",
+      "log_type": "system",
+      "source_index": "96",
+      "category": "MOTION",
+      "code": "405",
+      "message_template": "[MOTION] Client %d Motion Home Move End Received",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "해당 클라이언트로부터 원점 이동 End 수신받음",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2761",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 62
+      }
+    },
+    {
+      "id": "system:97",
+      "log_type": "system",
+      "source_index": "97",
+      "category": "MOTION",
+      "code": "405",
+      "message_template": "[MOTION] Client %d Motion Home Move Start Sent",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "해당 클라이언트로부터 원점 이동 Start 명령 내림",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2767",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 63
+      }
+    },
+    {
+      "id": "system:98",
+      "log_type": "system",
+      "source_index": "98",
+      "category": "MOTION",
+      "code": "406",
+      "message_template": "[MOTION] Move Model Position Ack Client %d",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "해당 클라이언트의 모델 위치 이동 명령 ACK 수신. 실제 이동 완료는 End 응답.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "설명 수정 · SlideInsDlg.cpp:2098",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 64
+      }
+    },
+    {
+      "id": "system:99",
+      "log_type": "system",
+      "source_index": "99",
+      "category": "MOTION",
+      "code": "406",
+      "message_template": "[MOTION] Move Model Position End Client %d",
+      "tags": [
+        "MOTION"
+      ],
+      "description": "모델 위치이동 명령을 내린 해당 클라이언트에게 응답 받음",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2110",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 65
+      }
+    },
+    {
+      "id": "system:100",
+      "log_type": "system",
+      "source_index": "100",
+      "category": "MOTION",
+      "code": "403",
+      "message_template": "Client %d, Sensor %d, 상부 모션 ON",
+      "tags": [],
+      "description": "클라이언트 Servo 상태 응답에서 상부 모션 ON 확인.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgMotionIO.cpp:771",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 66
+      }
+    },
+    {
+      "id": "system:101",
+      "log_type": "system",
+      "source_index": "101",
+      "category": "MOTION",
+      "code": "401",
+      "message_template": "Client %d -> Server : Motion Pos Save Request (code_set_Motion_Pos_Save_To_Server)",
+      "tags": [],
+      "description": "클라이언트가 서버에 모션 위치 저장을 요청한 패킷 수신.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · SlideInsDlg.cpp:2481",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 67
+      }
+    },
+    {
+      "id": "system:102",
+      "log_type": "system",
+      "source_index": "102",
+      "category": "MOTION",
+      "code": "403",
+      "message_template": "Client %d, Sensor %d, 하부 모션 ON",
+      "tags": [],
+      "description": "클라이언트 Servo 상태 응답에서 하부 모션 ON 확인.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgMotionIO.cpp:769",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 68
+      }
+    },
+    {
+      "id": "system:103",
+      "log_type": "system",
+      "source_index": "103",
+      "category": "AUTO OFFSET",
+      "code": "200",
+      "message_template": "Inspect Stop Client Send(Auto Offset Start)",
+      "tags": [],
+      "description": "Auto Offset 시작을 위해 Client 검사 중지 플래그 전송. 일반 Auto Stop 종료 로그와 별개.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "수정 · DlgAdminSetting.cpp:1042",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 69
+      }
+    },
+    {
+      "id": "system:104",
+      "log_type": "system",
+      "source_index": "104",
+      "category": "AUTO OFFSET",
+      "code": "406",
+      "message_template": "AutoOffset 실패로 재실행 시작 명령",
+      "tags": [],
+      "description": "모델 위치이동 후 타임아웃 되었을 때 오토옵샛 재실행",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2128",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 70
+      }
+    },
+    {
+      "id": "system:105",
+      "log_type": "system",
+      "source_index": "105",
+      "category": "AUTO OFFSET",
+      "code": "800",
+      "message_template": "AutoCal Start",
+      "tags": [],
+      "description": "오토옵셋 시작 전 로그(탑백 코팅 발리고, 측정중일때, RW 거리 증가했을 때)",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:171",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 71
+      }
+    },
+    {
+      "id": "system:106",
+      "log_type": "system",
+      "source_index": "106",
+      "category": "AUTO OFFSET",
+      "code": "800",
+      "message_template": "AutoCal Force Start.(임시)",
+      "tags": [],
+      "description": "(임시)강제 오토옵셋 (PLC 연결 끊기고, 라인 속도가 40 초과일 때)",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:178",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 72
+      }
+    },
+    {
+      "id": "system:107",
+      "log_type": "system",
+      "source_index": "107",
+      "category": "AUTO OFFSET",
+      "code": "800",
+      "message_template": "AutoCal Start (Line Stop)",
+      "tags": [],
+      "description": "오토옵셋 주기적 실행, \n[히든세팅]의 부동시에 오토옵셋 기능 사용시 [관리자 설정]의 설정한 시간마다 오토옵셋 실행",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:171",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 73
+      }
+    },
+    {
+      "id": "system:108",
+      "log_type": "system",
+      "source_index": "108",
+      "category": "AUTO OFFSET",
+      "code": "800",
+      "message_template": "Timer로 AutoOffset Flag 실행",
+      "tags": [],
+      "description": "타이머로 오토옵셋 진행\n조건: [관리자 설정]에서 오토옵셋 1)랏체인지시 2)시간 주기로",
+      "example": "영문 설정: Run Auto Offset based on the timer flag",
+      "recommended_action": null,
+      "source_note": "영문 문구 보완 · SlideInsDlg.cpp:1151",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 74
+      }
+    },
+    {
+      "id": "system:109",
+      "log_type": "system",
+      "source_index": "109",
+      "category": "AUTO OFFSET",
+      "code": "AutoOffset Data Over",
+      "message_template": "Sensor%d Auto Offset Data Diff Over.",
+      "tags": [],
+      "description": "AutoOffset Data 이상하게 나왔을때",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2460",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 75
+      }
+    },
+    {
+      "id": "system:110",
+      "log_type": "system",
+      "source_index": "110",
+      "category": "AUTO OFFSET",
+      "code": "900",
+      "message_template": "Auto Offset Step 1 Start",
+      "tags": [],
+      "description": "클라이언트 step 1 명령 내린 후 로그 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:3038",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 76
+      }
+    },
+    {
+      "id": "system:111",
+      "log_type": "system",
+      "source_index": "111",
+      "category": "AUTO OFFSET",
+      "code": "900",
+      "message_template": "Auto Offset Step 2 Start",
+      "tags": [],
+      "description": "클라이언트 step 2 명령 내린 후 로그 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:3066",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 77
+      }
+    },
+    {
+      "id": "system:112",
+      "log_type": "system",
+      "source_index": "112",
+      "category": "AUTO OFFSET",
+      "code": "900",
+      "message_template": "Auto Offset Step 3 Start",
+      "tags": [],
+      "description": "클라이언트 step 3 명령 내린 후 로그 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:3118",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 78
+      }
+    },
+    {
+      "id": "system:113",
+      "log_type": "system",
+      "source_index": "113",
+      "category": "AUTO OFFSET",
+      "code": "900",
+      "message_template": "Auto Offset Move no.1 Pos Start: Client-%d, Sensor-%d (%s)",
+      "tags": [],
+      "description": "OS이동 - 해당 클라, 센서 이동 명령 후 로그 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:3143",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 79
+      }
+    },
+    {
+      "id": "system:114",
+      "log_type": "system",
+      "source_index": "114",
+      "category": "AUTO OFFSET",
+      "code": "900",
+      "message_template": "Auto Offset Move no.2 Pos Start: Client-%d, Sensor-%d (%s)",
+      "tags": [],
+      "description": "OS이동 - 해당 클라, 센서 이동 명령 후 로그 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:3168",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 80
+      }
+    },
+    {
+      "id": "system:115",
+      "log_type": "system",
+      "source_index": "115",
+      "category": "AUTO OFFSET",
+      "code": "900",
+      "message_template": "Auto Offset Scan Start: Client-%d, Sensor-%d (%s)",
+      "tags": [],
+      "description": "스캔 시작 - 해당 클라, 센서 스캔 시작 명령 후 로그 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:3193",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 81
+      }
+    },
+    {
+      "id": "system:116",
+      "log_type": "system",
+      "source_index": "116",
+      "category": "AUTO OFFSET",
+      "code": "900",
+      "message_template": "Auto Offset Move Minus Limit Start: Client-%d, Sensor-%d (%s)",
+      "tags": [],
+      "description": "Minus Limit으로 해당 클라이언트, 센서 이동 명령 후 로그 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 82
+      }
+    },
+    {
+      "id": "system:117",
+      "log_type": "system",
+      "source_index": "117",
+      "category": "AUTO OFFSET",
+      "code": "900",
+      "message_template": "Auto Offset Move Plus Limit Start: Client-%d, Sensor-%d (%s)",
+      "tags": [],
+      "description": "Plus Limit으로 해당 클라이언트, 센서 이동 명령 후 로그 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:3215",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 83
+      }
+    },
+    {
+      "id": "system:118",
+      "log_type": "system",
+      "source_index": "118",
+      "category": "AUTO OFFSET",
+      "code": "900",
+      "message_template": "Auto Offset Step 1 End: Client-%d, Sensor-%d (9102)",
+      "tags": [],
+      "description": "오토옵셋 step 1 완료 후 로그 기록 // 해당 클라, 센서번호",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 84
+      }
+    },
+    {
+      "id": "system:119",
+      "log_type": "system",
+      "source_index": "119",
+      "category": "AUTO OFFSET",
+      "code": "900",
+      "message_template": "Auto Offset Step 2 End: Client-%d, Sensor-%d Thickness : %.1f (9202)",
+      "tags": [],
+      "description": "오토옵셋 step 2 완료 후 로그 기록 // 해당 클라, 센서번호, 두께",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 85
+      }
+    },
+    {
+      "id": "system:120",
+      "log_type": "system",
+      "source_index": "120",
+      "category": "AUTO OFFSET",
+      "code": "900",
+      "message_template": "Step 3 End Count : %d (9302)",
+      "tags": [],
+      "description": "오토옵셋 step 3 완료된 클라이언트 개수 세서 남김",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 86
+      }
+    },
+    {
+      "id": "system:121",
+      "log_type": "system",
+      "source_index": "121",
+      "category": "AUTO OFFSET",
+      "code": "900",
+      "message_template": "Auto Offset Step 3 End(Move Limit): Client-%d (9302)",
+      "tags": [],
+      "description": "오토옵셋 step 3 완료 후 로그 기록 // 해당 클라",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 87
+      }
+    },
+    {
+      "id": "system:122",
+      "log_type": "system",
+      "source_index": "122",
+      "category": "AUTO OFFSET",
+      "code": "900",
+      "message_template": "Auto Offset Move OS End: Client-%d, Sensor-%d , no.%d Position Move (9402)",
+      "tags": [],
+      "description": "오토옵셋 OS방향으로 이동 완료시 몇번 클라, 센서가 이동했는지 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 88
+      }
+    },
+    {
+      "id": "system:123",
+      "log_type": "system",
+      "source_index": "123",
+      "category": "AUTO OFFSET",
+      "code": "공백 1칸",
+      "message_template": "Sensor1 Cmd Pos : %f Act Pos : %f",
+      "tags": [],
+      "description": "OS 이동 완료 처리 중 Client 1 조건에서 센서 명령/실제 위치 기록. 코드 문자열은 숫자 900이 아닌 공백 1칸.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "코드 수정 · SlideInsDlg.cpp:3642,3645",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 89
+      }
+    },
+    {
+      "id": "system:124",
+      "log_type": "system",
+      "source_index": "124",
+      "category": "AUTO OFFSET",
+      "code": "900",
+      "message_template": "Auto Offset Scan OS End: Client-%d, Sensor-%d , Thickness : %.1f, no.%d Position Scan (9502)",
+      "tags": [],
+      "description": "오토옵셋 OS방향으로 스캔 완료시 // 클라, 센서 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 90
+      }
+    },
+    {
+      "id": "system:125",
+      "log_type": "system",
+      "source_index": "125",
+      "category": "AUTO OFFSET",
+      "code": "900",
+      "message_template": "Auto Offset Move Minus Limit End: Client-%d, Sensor-%d (9602)",
+      "tags": [],
+      "description": "오토옵셋 Minus Limit 방향으로 움직임 완료시 해당 클라, 센서 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 91
+      }
+    },
+    {
+      "id": "system:126",
+      "log_type": "system",
+      "source_index": "126",
+      "category": "AUTO OFFSET",
+      "code": "900",
+      "message_template": "Auto Offset Move DS Limit End: Client-%d, Sensor-%d, dir: %s (9802)",
+      "tags": [],
+      "description": "오토옵셋 DS 방향으로 이동 명령 완료시 // 클라, 센서, 방향(Plus, Minus) 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 92
+      }
+    },
+    {
+      "id": "system:127",
+      "log_type": "system",
+      "source_index": "127",
+      "category": "AUTO OFFSET",
+      "code": "900",
+      "message_template": "Auto Offset Move DS End: Client-%d, Sensor-%d , no.%d Position Move (9902)",
+      "tags": [],
+      "description": "오토옵셋 DS 방향에서 이동 명령 완료시 // 클라, 센서, 몇번 위치로 이동하는지(1, 2) 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 93
+      }
+    },
+    {
+      "id": "system:128",
+      "log_type": "system",
+      "source_index": "128",
+      "category": "AUTO OFFSET",
+      "code": "900",
+      "message_template": "Auto Offset Scan DS End: Client-%d, Sensor-%d , Thickness : %.1f ,no.%d Position Scan (9992)",
+      "tags": [],
+      "description": "오토옵셋 DS 방향에서 스캔 시작 명령 완료시 // 클라, 센서, 방향(Plus, Minus) 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 94
+      }
+    },
+    {
+      "id": "system:129",
+      "log_type": "system",
+      "source_index": "129",
+      "category": "AUTO OFFSET",
+      "code": "%d - Client: %d",
+      "message_template": "Auto Offset Move Plus Limit End: Client-%d, Sensor-%d (9652)",
+      "tags": [],
+      "description": "Plus Limit 이동 완료 응답. 코드 칸은 strCode(수신 패킷 코드와 Client 번호)로 기록. 패킷 코드 9652.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "코드 수정 · SlideInsDlg.cpp:3838",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 95
+      }
+    },
+    {
+      "id": "system:130",
+      "log_type": "system",
+      "source_index": "130",
+      "category": "AUTO OFFSET",
+      "code": "900",
+      "message_template": "AutoOffset Timeout Occurs / Move Model Position [nPacketCode: %d, Client: %d, Sensor: %d, Process: %s]",
+      "tags": [],
+      "description": "오토옵셋 타임아웃 발생시 / 모델 위치이동 명령 내림 // 해당 패킷, 클라이언트, 센서 번호",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:3909",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 96
+      }
+    },
+    {
+      "id": "system:131",
+      "log_type": "system",
+      "source_index": "131",
+      "category": "AUTO OFFSET",
+      "code": "406",
+      "message_template": "AutoOffset Interlock Reason : AutoOffset Time Out",
+      "tags": [],
+      "description": "Auto Offset 타임아웃으로 인터락 사유 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgAdminSetting.cpp:234",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 97
+      }
+    },
+    {
+      "id": "system:132",
+      "log_type": "system",
+      "source_index": "132",
+      "category": "AUTO OFFSET",
+      "code": "406",
+      "message_template": "AutoOffset Interlock Reason : TCenter Spec Out",
+      "tags": [],
+      "description": "TCenter 스펙 이탈로 인터락 사유 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgAdminSetting.cpp:244",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 98
+      }
+    },
+    {
+      "id": "system:133",
+      "log_type": "system",
+      "source_index": "133",
+      "category": "AUTO OFFSET",
+      "code": "406",
+      "message_template": "AutoOffset Interlock OFF : TCenter Spec in, Time in",
+      "tags": [],
+      "description": "TCenter 스펙 및 시간 조건 정상으로 인터락 해제.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgAdminSetting.cpp:256",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 99
+      }
+    },
+    {
+      "id": "system:134",
+      "log_type": "system",
+      "source_index": "134",
+      "category": "AUTO OFFSET",
+      "code": "406",
+      "message_template": "AutoOffset Interlock ON : Die Open",
+      "tags": [],
+      "description": "Die Open 조건으로 Auto Offset 인터락 설정.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgAdminSetting.cpp:260",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 100
+      }
+    },
+    {
+      "id": "system:135",
+      "log_type": "system",
+      "source_index": "135",
+      "category": "AUTO OFFSET",
+      "code": "800",
+      "message_template": "AutoOffset Manual Start",
+      "tags": [],
+      "description": "관리자 화면에서 Auto Offset 수동 시작.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgAdminSetting.cpp:980",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 101
+      }
+    },
+    {
+      "id": "system:136",
+      "log_type": "system",
+      "source_index": "136",
+      "category": "AUTO OFFSET",
+      "code": "0",
+      "message_template": "m_bAutoOffsetRunFlag(StartAutoOffsetStep1): %d",
+      "tags": [],
+      "description": "Auto Offset Step 1 시작 함수에서 실행 플래그 값 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgAdminSetting.cpp:1100",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 102
+      }
+    },
+    {
+      "id": "system:137",
+      "log_type": "system",
+      "source_index": "137",
+      "category": "AUTO OFFSET",
+      "code": "0",
+      "message_template": "Autooffset Interlock Start - MotionStep1",
+      "tags": [],
+      "description": "Step 1 모션 시작 시 Auto Offset 인터락 설정.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgAdminSetting.cpp:1120",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 103
+      }
+    },
+    {
+      "id": "system:138",
+      "log_type": "system",
+      "source_index": "138",
+      "category": "AUTO OFFSET",
+      "code": "800",
+      "message_template": "AutoOffset Timer Check - Inspect:%d RWIncreasing:%d TopCoat:%d BackCoat:%d UseUW:%d UWCut:%d UWFlag:%d",
+      "tags": [],
+      "description": "Auto Offset 시작 조건 확인용: 검사 플래그, RW 증가, Top/Back 코팅 및 Unwinder 관련 값 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · SlideInsDlg.cpp:164",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 104
+      }
+    },
+    {
+      "id": "system:139",
+      "log_type": "system",
+      "source_index": "139",
+      "category": "MASTER SAMPLE",
+      "code": "100",
+      "message_template": "%d번째 scan End",
+      "tags": [],
+      "description": "마스터 샘플 반복 스캔의 해당 회차 종료. 센서 결과 전부 성공을 의미하지는 않음.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "수정 · DlgAdminSetting.cpp:171",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 105
+      }
+    },
+    {
+      "id": "system:140",
+      "log_type": "system",
+      "source_index": "140",
+      "category": "MASTER SAMPLE",
+      "code": "200",
+      "message_template": "Master Sample Move Ack %d",
+      "tags": [],
+      "description": "Master Sample 위치로 이동 명령 내림",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2517",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 106
+      }
+    },
+    {
+      "id": "system:141",
+      "log_type": "system",
+      "source_index": "141",
+      "category": "MASTER SAMPLE",
+      "code": "200",
+      "message_template": "Scan 시작 가능합니다",
+      "tags": [],
+      "description": "Master Sample 위치로 이동 완료 했을 때",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2543",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 107
+      }
+    },
+    {
+      "id": "system:142",
+      "log_type": "system",
+      "source_index": "142",
+      "category": "MASTER SAMPLE",
+      "code": "200",
+      "message_template": "Scan 시작 Ack %d",
+      "tags": [],
+      "description": "Master Sample 위치에서 스캔 시작 명령 내림",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2529",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 108
+      }
+    },
+    {
+      "id": "system:143",
+      "log_type": "system",
+      "source_index": "143",
+      "category": "MASTER SAMPLE",
+      "code": "200",
+      "message_template": "Scan 완료",
+      "tags": [],
+      "description": "Master Sample 위치에서 스캔 완료 명령 받음",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2569",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 109
+      }
+    },
+    {
+      "id": "system:144",
+      "log_type": "system",
+      "source_index": "144",
+      "category": "MASTER SAMPLE",
+      "code": "800",
+      "message_template": "ThreadScanStart",
+      "tags": [],
+      "description": "FMS 모션 Cal 사용 시 지그 이동 및 실린더 초기화 후 스캔 시작 경로 진입.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgAdminSetting.cpp:119",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 110
+      }
+    },
+    {
+      "id": "system:145",
+      "log_type": "system",
+      "source_index": "145",
+      "category": "MASTER SAMPLE",
+      "code": "200",
+      "message_template": "[MasterSample] Server CSV skip(Missing: %s)",
+      "tags": [
+        "MasterSample"
+      ],
+      "description": "마스터 샘플 수집 대기 후 미수신 센서가 남아 서버 CSV 저장을 건너뜀. Missing은 C번호S번호 목록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgAdminSetting.cpp:158",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 111
+      }
+    },
+    {
+      "id": "system:146",
+      "log_type": "system",
+      "source_index": "146",
+      "category": "MASTER SAMPLE",
+      "code": "100",
+      "message_template": "Scan Logic End",
+      "tags": [],
+      "description": "마스터 샘플 스캔 반복 루프 종료.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgAdminSetting.cpp:184",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 112
+      }
+    },
+    {
+      "id": "system:147",
+      "log_type": "system",
+      "source_index": "147",
+      "category": "MASTER SAMPLE",
+      "code": "200",
+      "message_template": "[MasterSample][예외처리] 마스터 스캔 명령이 시작되지 않음 (Client:%d Sensor:%d)",
+      "tags": [
+        "MasterSample",
+        "예외처리"
+      ],
+      "description": "마스터 샘플 결과 수신 예외: 마스터 스캔 명령이 시작되지 않음",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · MasterSampleResultCollector.cpp / SlideInsDlg.cpp:2586,2592",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 113
+      }
+    },
+    {
+      "id": "system:148",
+      "log_type": "system",
+      "source_index": "148",
+      "category": "MASTER SAMPLE",
+      "code": "200",
+      "message_template": "[MasterSample][예외처리] 클라이언트 수 불일치 (nScanCnt:%d m_nMasterScanCount:%d Client:%d Sensor:%d)",
+      "tags": [
+        "MasterSample",
+        "예외처리"
+      ],
+      "description": "문구는 클라이언트 수 불일치이나 실제 비교값은 수신 스캔 회차와 현재 마스터 스캔 회차. 불일치 결과를 제외.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · MasterSampleResultCollector.cpp / SlideInsDlg.cpp:2586,2592",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 114
+      }
+    },
+    {
+      "id": "system:149",
+      "log_type": "system",
+      "source_index": "149",
+      "category": "MASTER SAMPLE",
+      "code": "200",
+      "message_template": "[MasterSample][예외처리] 미사용 센서 (Client:%d Sensor:%d)",
+      "tags": [
+        "MasterSample",
+        "예외처리"
+      ],
+      "description": "마스터 샘플 결과 수신 예외: 미사용 센서",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · MasterSampleResultCollector.cpp / SlideInsDlg.cpp:2586,2592",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 115
+      }
+    },
+    {
+      "id": "system:150",
+      "log_type": "system",
+      "source_index": "150",
+      "category": "MASTER SAMPLE",
+      "code": "200",
+      "message_template": "[MasterSample][예외처리] 클라이언트 응답 실패 (Client:%d Sensor:%d)",
+      "tags": [
+        "MasterSample",
+        "예외처리"
+      ],
+      "description": "마스터 샘플 결과 수신 예외: 클라이언트 응답 실패",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · MasterSampleResultCollector.cpp / SlideInsDlg.cpp:2586,2592",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 116
+      }
+    },
+    {
+      "id": "system:151",
+      "log_type": "system",
+      "source_index": "151",
+      "category": "MASTER SAMPLE",
+      "code": "200",
+      "message_template": "[MasterSample][예외처리] 중복 결과 수신 (Client:%d Sensor:%d)",
+      "tags": [
+        "MasterSample",
+        "예외처리"
+      ],
+      "description": "마스터 샘플 결과 수신 예외: 중복 결과 수신",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · MasterSampleResultCollector.cpp / SlideInsDlg.cpp:2586,2592",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 117
+      }
+    },
+    {
+      "id": "system:152",
+      "log_type": "system",
+      "source_index": "152",
+      "category": "MASTER SAMPLE",
+      "code": "200",
+      "message_template": "[MasterSample] Server CSV saved. %s",
+      "tags": [
+        "MasterSample"
+      ],
+      "description": "사용 센서 결과가 모두 수집되어 서버 Back/Top CSV 저장 완료.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · MasterSampleResultCollector.cpp / SlideInsDlg.cpp:2586,2592",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 118
+      }
+    },
+    {
+      "id": "system:153",
+      "log_type": "system",
+      "source_index": "153",
+      "category": "MOTION CAL JIG",
+      "code": "800",
+      "message_template": "모든 클라이언트 Cal 등록 모션 초기 위치 이동 완료",
+      "tags": [],
+      "description": "모든 클라이언트가 Cal 모션 초기 위치로 이동 완료 명령 받았을 때",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2168",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 119
+      }
+    },
+    {
+      "id": "system:154",
+      "log_type": "system",
+      "source_index": "154",
+      "category": "MOTION CAL JIG",
+      "code": "800",
+      "message_template": "지그 이동 시작",
+      "tags": [],
+      "description": "모든 클라이언트가 Cal 모션 초기 위치로 이동 후 지그 이동 시작하고 로그 남김",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:286",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 120
+      }
+    },
+    {
+      "id": "system:155",
+      "log_type": "system",
+      "source_index": "155",
+      "category": "MOTION CAL JIG",
+      "code": "800",
+      "message_template": "Client %d 측정 시작 Send",
+      "tags": [],
+      "description": "해당 클라이언트에 지그 측정 시작 명령 내림",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:282",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 121
+      }
+    },
+    {
+      "id": "system:156",
+      "log_type": "system",
+      "source_index": "156",
+      "category": "MOTION CAL JIG",
+      "code": "800",
+      "message_template": "Cal 다음 위치 이동 완료(Client %d)",
+      "tags": [],
+      "description": "Cal 다음 위치 완료시 해당 클라이언트 로그 남김",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2197",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 122
+      }
+    },
+    {
+      "id": "system:157",
+      "log_type": "system",
+      "source_index": "157",
+      "category": "MOTION CAL JIG",
+      "code": "800",
+      "message_template": "모션 위치별 Cal데이터 취득 완료(Client %d)",
+      "tags": [],
+      "description": "모션 위치별 Cal 데이터 취득 완료했을 때 해당 클라 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2232",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 123
+      }
+    },
+    {
+      "id": "system:158",
+      "log_type": "system",
+      "source_index": "158",
+      "category": "MOTION CAL JIG",
+      "code": "800",
+      "message_template": "모션 위치별 Cal 완료(Client %d)",
+      "tags": [],
+      "description": "모션 위치별 Cal 완료 했을 때 해당 클라 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2262",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 124
+      }
+    },
+    {
+      "id": "system:159",
+      "log_type": "system",
+      "source_index": "159",
+      "category": "MOTION CAL JIG",
+      "code": "800",
+      "message_template": "MotionPosCalMove Send(Client %d)",
+      "tags": [],
+      "description": "클라이언트에 모션 위치 Cal 이동 명령 송신.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgAdminSetting.cpp:3528",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 125
+      }
+    },
+    {
+      "id": "system:160",
+      "log_type": "system",
+      "source_index": "160",
+      "category": "MOTION CAL JIG",
+      "code": "800",
+      "message_template": "InitCylinder Start (Ready:%d)",
+      "tags": [],
+      "description": "실린더 초기화 시작 시 Ready I/O 값 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · SlideInsDlg.cpp:1798",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 126
+      }
+    },
+    {
+      "id": "system:161",
+      "log_type": "system",
+      "source_index": "161",
+      "category": "MOTION CAL JIG",
+      "code": "800",
+      "message_template": "MotionPosCalMove End Ack(Client %d, EndMoveCnt:%d)",
+      "tags": [],
+      "description": "모션 위치 Cal 이동 완료 ACK 수신 시 Client 번호와 현재 완료 개수 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · SlideInsDlg.cpp:2193",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 127
+      }
+    },
+    {
+      "id": "system:162",
+      "log_type": "system",
+      "source_index": "162",
+      "category": "AUTO EDGE",
+      "code": "Auto Edge Search",
+      "message_template": "자동 엣지 탐색 초기 위치 이동 시작",
+      "tags": [],
+      "description": "자동 엣지 찾기 버튼 눌렀을 때 이동 시작",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · DlgAdminSetting.cpp:210",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 128
+      }
+    },
+    {
+      "id": "system:163",
+      "log_type": "system",
+      "source_index": "163",
+      "category": "AUTO EDGE",
+      "code": "Auto Edge Search",
+      "message_template": "자동 엣지 탐색 초기 위치 이동 완료, Client ID : %d",
+      "tags": [],
+      "description": "자동 엣지 찾기 클라이언트에서 이동 완료했을 때",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2292",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 129
+      }
+    },
+    {
+      "id": "system:164",
+      "log_type": "system",
+      "source_index": "164",
+      "category": "AUTO EDGE",
+      "code": "Auto Edge Search",
+      "message_template": "자동 엣지 위치 실패, Client ID : %d, Sensor ID : %d",
+      "tags": [],
+      "description": "자동 엣지 찾기 위치 실패시 로그 출력",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2421",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 130
+      }
+    },
+    {
+      "id": "system:165",
+      "log_type": "system",
+      "source_index": "165",
+      "category": "AUTO EDGE",
+      "code": "Auto Edge Search",
+      "message_template": "자동 엣지 위치 완료, Client ID : %d, Sensor ID : %d",
+      "tags": [],
+      "description": "자동 엣지 찾기 위치 완료시 로그 출력",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2432",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 131
+      }
+    },
+    {
+      "id": "system:166",
+      "log_type": "system",
+      "source_index": "166",
+      "category": "AUTO EDGE",
+      "code": "Auto Edge Search",
+      "message_template": "이동한 위치 : Back, Top {%.3lf, %.3lf}",
+      "tags": [],
+      "description": "자동 엣지 찾기 이동한 위치 로그 출력",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2436",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 132
+      }
+    },
+    {
+      "id": "system:167",
+      "log_type": "system",
+      "source_index": "167",
+      "category": "AUTO EDGE",
+      "code": "Auto_Edge_Search",
+      "message_template": "Client ID : %d , FirstSensor : %d, 자동 엣지 탐색 기능 실행",
+      "tags": [],
+      "description": "모든 클라이언트가 초기 위치 이동 완료 시 Auto Edge Search 시작 - 첫번째 센서",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "코드 수정 · SlideInsDlg.cpp:502,512",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 133
+      }
+    },
+    {
+      "id": "system:168",
+      "log_type": "system",
+      "source_index": "168",
+      "category": "AUTO EDGE",
+      "code": "Auto_Edge_Search",
+      "message_template": "Client ID : %d , SecondSensor : %d, 자동 엣지 탐색 기능 실행",
+      "tags": [],
+      "description": "모든 클라이언트가 초기 위치 이동 완료 시 Auto Edge Search 시작 - 두번째 센서",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "코드 수정 · SlideInsDlg.cpp:502,512",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 134
+      }
+    },
+    {
+      "id": "system:169",
+      "log_type": "system",
+      "source_index": "169",
+      "category": "AUTO EDGE",
+      "code": "Auto Edge Search",
+      "message_template": "자동 엣지 탐색 완료, Client ID : %d, Sensor ID : %d ,찾은 엣지 : %d 개",
+      "tags": [],
+      "description": "자동 엣지 찾기 탐색 후 해당 클라, 센서별 엣지 개수 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2328",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 135
+      }
+    },
+    {
+      "id": "system:170",
+      "log_type": "system",
+      "source_index": "170",
+      "category": "AUTO EDGE",
+      "code": "Auto Edge Search",
+      "message_template": "찾은 엣지 위치 : {%.3lf, ...}",
+      "tags": [],
+      "description": "찾은 엣지 개수만큼 위치를 이어 붙여 출력. 고정 2개 형식이 아님.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "형식 보완 · SlideInsDlg.cpp:2320~2345",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 136
+      }
+    },
+    {
+      "id": "system:171",
+      "log_type": "system",
+      "source_index": "171",
+      "category": "AUTO EDGE",
+      "code": "Auto Edge Search",
+      "message_template": "찾은 엣지 방향 : {Right,}",
+      "tags": [],
+      "description": "찾은 각 엣지 방향을 Right, 또는 Left,로 누적한 목록. 복수 방향이 한 로그에 함께 표시될 수 있음.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "형식 보완 · SlideInsDlg.cpp:2345",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 137
+      }
+    },
+    {
+      "id": "system:172",
+      "log_type": "system",
+      "source_index": "172",
+      "category": "AUTO EDGE",
+      "code": "Auto Edge Search",
+      "message_template": "찾은 엣지 방향 : {Left,}",
+      "tags": [],
+      "description": "찾은 각 엣지 방향을 Right, 또는 Left,로 누적한 목록. 복수 방향이 한 로그에 함께 표시될 수 있음.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "형식 보완 · SlideInsDlg.cpp:2345",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 138
+      }
+    },
+    {
+      "id": "system:173",
+      "log_type": "system",
+      "source_index": "173",
+      "category": "AUTO EDGE",
+      "code": "Auto Edge Search",
+      "message_template": "자동 엣지 탐색 완료, Client ID : %d, Sensor ID : %d ,찾은 엣지 개수 없음",
+      "tags": [],
+      "description": "자동 엣지 찾기 탐색 후 찾은 엣지가 없을 때",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2369",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 139
+      }
+    },
+    {
+      "id": "system:174",
+      "log_type": "system",
+      "source_index": "174",
+      "category": "AUTO EDGE",
+      "code": "Auto Edge Search",
+      "message_template": "자동 엣지 탐색 중지, Client ID : %d, Sensor ID : %d ,스캔 타임 아웃",
+      "tags": [],
+      "description": "자동 엣지 찾기 탐색 중 스캔 타임아웃 되었을 때",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2374",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 140
+      }
+    },
+    {
+      "id": "system:175",
+      "log_type": "system",
+      "source_index": "175",
+      "category": "CHART DATA",
+      "code": "119",
+      "message_template": "Lane 잘못 입력",
+      "tags": [],
+      "description": "그리드 표에 Lane별 값 넣어줄 때 레인 잘못 입력",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · DlgNewChartMonitor.cpp:5135",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 141
+      }
+    },
+    {
+      "id": "system:176",
+      "log_type": "system",
+      "source_index": "176",
+      "category": "CHART DATA",
+      "code": "300",
+      "message_template": "Client-1,1, 실시간 데이터 불러오는 메시지 송신",
+      "tags": [],
+      "description": "차트 Client 1, Sensor 1 더블클릭 시 실시간 데이터 요청 패킷 송신. 수신 완료 로그 아님.",
+      "example": "영문 설정: Client-%d,%d, Sending real-time data request message",
+      "recommended_action": null,
+      "source_note": "설명 수정 · DlgNewChartMonitor.cpp:3913",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 142
+      }
+    },
+    {
+      "id": "system:177",
+      "log_type": "system",
+      "source_index": "177",
+      "category": "CHART DATA",
+      "code": "300",
+      "message_template": "Client-1,2, 실시간 데이터 불러오는 메시지 송신",
+      "tags": [],
+      "description": "차트 Client 1, Sensor 2 더블클릭 시 실시간 데이터 요청 패킷 송신. 수신 완료 로그 아님.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "설명 수정 · DlgNewChartMonitor.cpp:3913",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 143
+      }
+    },
+    {
+      "id": "system:178",
+      "log_type": "system",
+      "source_index": "178",
+      "category": "CHART DATA",
+      "code": "300",
+      "message_template": "Client-2,1, 실시간 데이터 불러오는 메시지 송신",
+      "tags": [],
+      "description": "차트 Client 2, Sensor 1 더블클릭 시 실시간 데이터 요청 패킷 송신. 수신 완료 로그 아님.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "설명 수정 · DlgNewChartMonitor.cpp:3913",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 144
+      }
+    },
+    {
+      "id": "system:179",
+      "log_type": "system",
+      "source_index": "179",
+      "category": "CHART DATA",
+      "code": "300",
+      "message_template": "Client-2,2, 실시간 데이터 불러오는 메시지 송신",
+      "tags": [],
+      "description": "차트 Client 2, Sensor 2 더블클릭 시 실시간 데이터 요청 패킷 송신. 수신 완료 로그 아님.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "설명 수정 · DlgNewChartMonitor.cpp:3913",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 145
+      }
+    },
+    {
+      "id": "system:180",
+      "log_type": "system",
+      "source_index": "180",
+      "category": "CHART DATA",
+      "code": "300",
+      "message_template": "Client-3,1, 실시간 데이터 불러오는 메시지 송신",
+      "tags": [],
+      "description": "차트 Client 3, Sensor 1 더블클릭 시 실시간 데이터 요청 패킷 송신. 수신 완료 로그 아님.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "설명 수정 · DlgNewChartMonitor.cpp:3913",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 146
+      }
+    },
+    {
+      "id": "system:181",
+      "log_type": "system",
+      "source_index": "181",
+      "category": "CHART DATA",
+      "code": "300",
+      "message_template": "Client-3,2, 실시간 데이터 불러오는 메시지 송신",
+      "tags": [],
+      "description": "차트 Client 3, Sensor 2 더블클릭 시 실시간 데이터 요청 패킷 송신. 수신 완료 로그 아님.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "설명 수정 · DlgNewChartMonitor.cpp:3913",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 147
+      }
+    },
+    {
+      "id": "system:182",
+      "log_type": "system",
+      "source_index": "182",
+      "category": "CHART DATA",
+      "code": "300",
+      "message_template": "Client-4,1, 실시간 데이터 불러오는 메시지 송신",
+      "tags": [],
+      "description": "차트 Client 4, Sensor 1 더블클릭 시 실시간 데이터 요청 패킷 송신. 수신 완료 로그 아님.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "설명 수정 · DlgNewChartMonitor.cpp:3913",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 148
+      }
+    },
+    {
+      "id": "system:183",
+      "log_type": "system",
+      "source_index": "183",
+      "category": "CHART DATA",
+      "code": "300",
+      "message_template": "Client-4,2, 실시간 데이터 불러오는 메시지 송신",
+      "tags": [],
+      "description": "차트 Client 4, Sensor 2 더블클릭 시 실시간 데이터 요청 패킷 송신. 수신 완료 로그 아님.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "설명 수정 · DlgNewChartMonitor.cpp:3913",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 149
+      }
+    },
+    {
+      "id": "system:184",
+      "log_type": "system",
+      "source_index": "184",
+      "category": "CHART DATA",
+      "code": "501",
+      "message_template": "[Log]Sensor %d Stop Save Log",
+      "tags": [
+        "Log"
+      ],
+      "description": "센서 데이터 로그 저장을 OFF로 변경했을 때 해당 센서 번호 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "설명 추가 · SlideInsDlg.cpp:1747",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 150
+      }
+    },
+    {
+      "id": "system:185",
+      "log_type": "system",
+      "source_index": "185",
+      "category": "CHART DATA",
+      "code": "502",
+      "message_template": "Frame 데이터 받은 갯수 -> Client1 : %d, Client2 : %d, Client3 : %d, Client4 : %d",
+      "tags": [],
+      "description": "랏 체인지시 클라이언트로부터 받은 Frame 개수 표기(엔코더 사용시 엔코더 리셋 버튼 눌렀을 때도 해당 로그 기록)",
+      "example": "영문 설정: Number of received Frame data -> Client1 : %d, Client2 : %d, Client3 : %d, Client4 : %d",
+      "recommended_action": null,
+      "source_note": "영문 문구 보완 · DlgSystemIO.cpp:6366",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 151
+      }
+    },
+    {
+      "id": "system:186",
+      "log_type": "system",
+      "source_index": "186",
+      "category": "CHART DATA",
+      "code": "777",
+      "message_template": "[Tab]Top NG : %.1f / Back NG : %.1f / Fat-Edge NG : %.1f / Total R/W Update : %.1f",
+      "tags": [
+        "Tab"
+      ],
+      "description": "그리드 컨트롤(표)에 표기되는 NG 발생한 마지막 해당 RW 미터 남김(Tab부)\n- PLC RW 사용시) 랏 체인지시\n- 엔코더 RW 미터 사용시)랏 체인지시, 엔코더 리셋 버튼 눌렀을 때",
+      "example": "[Tab]Top NG : 0.0 / Back NG : 0.0 / Fat-Edge NG : 0.0 / Total R/W Update : 1264.4",
+      "recommended_action": null,
+      "source_note": "확인 · DlgNewChartMonitor.cpp:5392",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 152
+      }
+    },
+    {
+      "id": "system:187",
+      "log_type": "system",
+      "source_index": "187",
+      "category": "CHART DATA",
+      "code": "777",
+      "message_template": "[Bottom]Top NG : %.1f / Back NG : %.1f / Fat-Edge NG : %.1f",
+      "tags": [
+        "Bottom"
+      ],
+      "description": "그리드 컨트롤(표)에 표기되는 NG 발생한 마지막 해당 RW 미터 남김(Bottom 부)\n- PLC RW 사용시) 랏 체인지시\n- 엔코더 RW 미터 사용시)랏 체인지시, 엔코더 리셋 버튼 눌렀을 때",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "문구 수정 · DlgNewChartMonitor.cpp:5394",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 153
+      }
+    },
+    {
+      "id": "system:188",
+      "log_type": "system",
+      "source_index": "188",
+      "category": "CHART DATA",
+      "code": "CODE_487",
+      "message_template": "[Chart Reset] 그래프 append %ld개 생략(lock 충돌)",
+      "tags": [
+        "Chart Reset"
+      ],
+      "description": "차트 잠금 충돌로 append 데이터 일부를 생략했을 때 생략 개수 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgNewChartMonitor.cpp:643",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 154
+      }
+    },
+    {
+      "id": "system:189",
+      "log_type": "system",
+      "source_index": "189",
+      "category": "CHART DATA",
+      "code": "1486",
+      "message_template": "Auto Move Frame Skip",
+      "tags": [],
+      "description": "자동 이동 구간의 프레임을 검사 데이터에서 제외할 때 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgNewChartMonitor.cpp:5724",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 155
+      }
+    },
+    {
+      "id": "system:190",
+      "log_type": "system",
+      "source_index": "190",
+      "category": "CHART DATA",
+      "code": "501",
+      "message_template": "[Log]Sensor %d Start Save Log",
+      "tags": [
+        "Log"
+      ],
+      "description": "센서 데이터 로그 저장을 ON으로 변경했을 때 해당 센서 번호 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · SlideInsDlg.cpp:1754",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 156
+      }
+    },
+    {
+      "id": "system:191",
+      "log_type": "system",
+      "source_index": "191",
+      "category": "MARKING",
+      "code": "Debug_1",
+      "message_template": "Test Marking Start, RW1 : %d, Start Signal : 1, Code : 601",
+      "tags": [],
+      "description": "알람 스펙 창- RW1 마킹 스타트 버튼 눌렀을 때 / RW 미터",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "수정 · DlgJudgeSpecSetting.cpp:1055",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 157
+      }
+    },
+    {
+      "id": "system:192",
+      "log_type": "system",
+      "source_index": "192",
+      "category": "MARKING",
+      "code": "Debug_1",
+      "message_template": "Test Marking End, RW1 : %d, End Signal : 1, Code : 601",
+      "tags": [],
+      "description": "알람 스펙 창 - RW1 마킹 스탑 버튼 눌렀을 때 / RW 미터",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "수정 · DlgJudgeSpecSetting.cpp:1090",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 158
+      }
+    },
+    {
+      "id": "system:193",
+      "log_type": "system",
+      "source_index": "193",
+      "category": "MARKING",
+      "code": "Debug_1",
+      "message_template": "Marking Start, RW2 : %d, Start Signal : 1, Code : 601",
+      "tags": [],
+      "description": "알람 스펙 창 - RW2 마킹 스타트 버튼 눌렀을 때 / RW 미터",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "수정 · DlgJudgeSpecSetting.cpp:1124",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 159
+      }
+    },
+    {
+      "id": "system:194",
+      "log_type": "system",
+      "source_index": "194",
+      "category": "MARKING",
+      "code": "Debug_1",
+      "message_template": "Marking End, RW2 : %d, End Signal : 1, Code : 601",
+      "tags": [],
+      "description": "알람 스펙 창 - RW2 마킹 스탑 버튼 눌렀을 때 / RW 미터",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "수정 · DlgJudgeSpecSetting.cpp:1159",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 160
+      }
+    },
+    {
+      "id": "system:195",
+      "log_type": "system",
+      "source_index": "195",
+      "category": "MARKING",
+      "code": "119",
+      "message_template": "Lane 잘못 입력(Marking)",
+      "tags": [],
+      "description": "마킹 처리에서 Lane 인덱스 유효 범위를 벗어남.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:12616",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 161
+      }
+    },
+    {
+      "id": "system:196",
+      "log_type": "system",
+      "source_index": "196",
+      "category": "MARKING",
+      "code": "910",
+      "message_template": "RW %d$ Marking Start Pos : %.1f / Type : %s / Code : %d, Marking Use / LotID : %s",
+      "tags": [],
+      "description": "마킹 구간 시작 처리 시 RW 또는 Lane, 면, 위치, 불량 종류 및 Lot ID 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:12782",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 162
+      }
+    },
+    {
+      "id": "system:197",
+      "log_type": "system",
+      "source_index": "197",
+      "category": "MARKING",
+      "code": "910",
+      "message_template": "RW %d$ Marking End Pos : %.1f / Type : %s $ Marking Use / LotID : %s",
+      "tags": [],
+      "description": "마킹 구간 종료 처리 시 RW 또는 Lane, 면, 위치, 불량 종류 및 Lot ID 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:12799",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 163
+      }
+    },
+    {
+      "id": "system:198",
+      "log_type": "system",
+      "source_index": "198",
+      "category": "MARKING",
+      "code": "910",
+      "message_template": "Lane %d$ Marking(Top) Start Pos : %.1f / Type : %s / Code : %d, Marking Use / LotID : %s",
+      "tags": [],
+      "description": "마킹 구간 시작 처리 시 RW 또는 Lane, 면, 위치, 불량 종류 및 Lot ID 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:13954",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 164
+      }
+    },
+    {
+      "id": "system:199",
+      "log_type": "system",
+      "source_index": "199",
+      "category": "MARKING",
+      "code": "910",
+      "message_template": "Lane %d$ Marking(Top) End Pos : %.1f / Type : %s $ Marking Use / LotID : %s",
+      "tags": [],
+      "description": "마킹 구간 종료 처리 시 RW 또는 Lane, 면, 위치, 불량 종류 및 Lot ID 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:13973",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 165
+      }
+    },
+    {
+      "id": "system:200",
+      "log_type": "system",
+      "source_index": "200",
+      "category": "MARKING",
+      "code": "910",
+      "message_template": "Lane %d$ Marking(Back) Start Pos : %.1f / Type : %s / Code : %d, Marking Use / LotID : %s",
+      "tags": [],
+      "description": "마킹 구간 시작 처리 시 RW 또는 Lane, 면, 위치, 불량 종류 및 Lot ID 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:14186",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 166
+      }
+    },
+    {
+      "id": "system:201",
+      "log_type": "system",
+      "source_index": "201",
+      "category": "MARKING",
+      "code": "910",
+      "message_template": "Lane %d$ Marking(Back) End Pos : %.1f / Type : %s $ Marking Use / LotID : %s",
+      "tags": [],
+      "description": "마킹 구간 종료 처리 시 RW 또는 Lane, 면, 위치, 불량 종류 및 Lot ID 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:14205",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 167
+      }
+    },
+    {
+      "id": "system:20",
+      "log_type": "system",
+      "source_index": "20",
+      "category": "ROLLMAP",
+      "code": "999",
+      "message_template": "[Rollmap] Keyence PLC Send Fail(Disconnected) %s",
+      "tags": [
+        "Rollmap"
+      ],
+      "description": "롤맵 PLC 통신 객체가 없어 전송 실패. 시스템 파일에만 기록하고 이벤트 화면에는 표시하지 않음.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:10257",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 168
+      }
+    },
+    {
+      "id": "system:21",
+      "log_type": "system",
+      "source_index": "21",
+      "category": "ROLLMAP",
+      "code": "999",
+      "message_template": "[Rollmap] Keyence PLC Send Fail %s",
+      "tags": [
+        "Rollmap"
+      ],
+      "description": "롤맵 PLC 명령 전송 실패. 시스템 파일 전용.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:10265",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 169
+      }
+    },
+    {
+      "id": "system:22",
+      "log_type": "system",
+      "source_index": "22",
+      "category": "ROLLMAP",
+      "code": "999",
+      "message_template": "[Rollmap] Keyence PLC Read Fail %d times. Reconnect Start %s",
+      "tags": [
+        "Rollmap"
+      ],
+      "description": "롤맵 PLC 읽기 연속 실패 횟수가 재접속 기준에 도달하여 재접속 시작. 시스템 파일 전용.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:10305",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 170
+      }
+    },
+    {
+      "id": "system:23",
+      "log_type": "system",
+      "source_index": "23",
+      "category": "ROLLMAP",
+      "code": "999",
+      "message_template": "[Rollmap] Keyence PLC Reconnect %s",
+      "tags": [
+        "Rollmap"
+      ],
+      "description": "롤맵 PLC 재접속 결과 Success 또는 Fail. 시스템 파일 전용.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:10342",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 171
+      }
+    },
+    {
+      "id": "system:206",
+      "log_type": "system",
+      "source_index": "206",
+      "category": "ROLLMAP",
+      "code": "909",
+      "message_template": "(SKIP)Lane#%d $ Back-(Bottom) Skip Pos: %.1f / Skip Count: %d",
+      "tags": [],
+      "description": "롤맵 불량 구간 종료 대기 중 Skip 위치 및 연속 Skip 카운트 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:12201",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 172
+      }
+    },
+    {
+      "id": "system:207",
+      "log_type": "system",
+      "source_index": "207",
+      "category": "ROLLMAP",
+      "code": "909",
+      "message_template": "Lane#%d $ Back-(Bottom) End Pos: %.1f / LotID : %s",
+      "tags": [],
+      "description": "롤맵 불량 구간 종료 등록. Lane, 면/구간, 종료 미터 및 Lot ID 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:12217",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 173
+      }
+    },
+    {
+      "id": "system:208",
+      "log_type": "system",
+      "source_index": "208",
+      "category": "ROLLMAP",
+      "code": "909",
+      "message_template": "Lane#%d $ Top-(Tab) Start Pos: %.1f / Type: %d / LotID : %s",
+      "tags": [],
+      "description": "롤맵 불량 구간 시작 등록. Lane, 면/구간, 시작 미터, 불량 코드, Lot ID 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:12304",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 174
+      }
+    },
+    {
+      "id": "system:209",
+      "log_type": "system",
+      "source_index": "209",
+      "category": "ROLLMAP",
+      "code": "909",
+      "message_template": "Lane#%d $ Top-(Bottom) Start Pos: %.1f / Type: %d / LotID : %s",
+      "tags": [],
+      "description": "롤맵 불량 구간 시작 등록. Lane, 면/구간, 시작 미터, 불량 코드, Lot ID 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:12324",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 175
+      }
+    },
+    {
+      "id": "system:210",
+      "log_type": "system",
+      "source_index": "210",
+      "category": "ROLLMAP",
+      "code": "909",
+      "message_template": "(SKIP)Lane#%d $ Top-(Tab) Skip Pos: %.1f / Skip Count: %d",
+      "tags": [],
+      "description": "롤맵 불량 구간 종료 대기 중 Skip 위치 및 연속 Skip 카운트 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:12339",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 176
+      }
+    },
+    {
+      "id": "system:211",
+      "log_type": "system",
+      "source_index": "211",
+      "category": "ROLLMAP",
+      "code": "909",
+      "message_template": "Lane#%d $ Top-(Tab) End Pos: %.1f / LotID : %s",
+      "tags": [],
+      "description": "롤맵 불량 구간 종료 등록. Lane, 면/구간, 종료 미터 및 Lot ID 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:12355",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 177
+      }
+    },
+    {
+      "id": "system:212",
+      "log_type": "system",
+      "source_index": "212",
+      "category": "ROLLMAP",
+      "code": "909",
+      "message_template": "(SKIP)Lane#%d $ Top-(Bottom) Skip Pos: %.1f / Skip Count: %d",
+      "tags": [],
+      "description": "롤맵 불량 구간 종료 대기 중 Skip 위치 및 연속 Skip 카운트 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:12368",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 178
+      }
+    },
+    {
+      "id": "system:213",
+      "log_type": "system",
+      "source_index": "213",
+      "category": "ROLLMAP",
+      "code": "909",
+      "message_template": "Lane#%d $ Top-(Bottom) End Pos: %.1f / LotID : %s",
+      "tags": [],
+      "description": "롤맵 불량 구간 종료 등록. Lane, 면/구간, 종료 미터 및 Lot ID 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:12384",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 179
+      }
+    },
+    {
+      "id": "system:214",
+      "log_type": "system",
+      "source_index": "214",
+      "category": "ROLLMAP",
+      "code": "909",
+      "message_template": "Lane#%d $ FatEdge-(Tab) Start Pos: %.1f / Type: %d / LotID : %s",
+      "tags": [],
+      "description": "롤맵 불량 구간 시작 등록. Lane, 면/구간, 시작 미터, 불량 코드, Lot ID 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:12473",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 180
+      }
+    },
+    {
+      "id": "system:215",
+      "log_type": "system",
+      "source_index": "215",
+      "category": "ROLLMAP",
+      "code": "909",
+      "message_template": "Lane#%d $ FatEdge-(Bottom) Start Pos: %.1f / Type: %d / LotID : %s",
+      "tags": [],
+      "description": "롤맵 불량 구간 시작 등록. Lane, 면/구간, 시작 미터, 불량 코드, Lot ID 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:12493",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 181
+      }
+    },
+    {
+      "id": "system:216",
+      "log_type": "system",
+      "source_index": "216",
+      "category": "ROLLMAP",
+      "code": "909",
+      "message_template": "(SKIP)Lane#%d $ FatEdge-(Tab) Skip Pos: %.1f / Skip Count: %d",
+      "tags": [],
+      "description": "롤맵 불량 구간 종료 대기 중 Skip 위치 및 연속 Skip 카운트 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:12508",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 182
+      }
+    },
+    {
+      "id": "system:217",
+      "log_type": "system",
+      "source_index": "217",
+      "category": "ROLLMAP",
+      "code": "909",
+      "message_template": "Lane#%d $ FatEdge-(Tab) End Pos: %.1f / LotID : %s",
+      "tags": [],
+      "description": "롤맵 불량 구간 종료 등록. Lane, 면/구간, 종료 미터 및 Lot ID 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:12524",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 183
+      }
+    },
+    {
+      "id": "system:218",
+      "log_type": "system",
+      "source_index": "218",
+      "category": "ROLLMAP",
+      "code": "909",
+      "message_template": "(SKIP)Lane#%d $ FatEdge-(Bottom) Skip Pos: %.1f / Skip Count: %d",
+      "tags": [],
+      "description": "롤맵 불량 구간 종료 대기 중 Skip 위치 및 연속 Skip 카운트 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:12537",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 184
+      }
+    },
+    {
+      "id": "system:219",
+      "log_type": "system",
+      "source_index": "219",
+      "category": "ROLLMAP",
+      "code": "909",
+      "message_template": "Lane#%d $ FatEdge-(Bottom) End Pos: %.1f / LotID : %s",
+      "tags": [],
+      "description": "롤맵 불량 구간 종료 등록. Lane, 면/구간, 종료 미터 및 Lot ID 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:12553",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 185
+      }
+    },
+    {
+      "id": "system:220",
+      "log_type": "system",
+      "source_index": "220",
+      "category": "PLC 알람 설정",
+      "code": "800",
+      "message_template": "Check No BTM Alarm To Plc - 2 minute Interlock Start",
+      "tags": [],
+      "description": "BTM 알람 미사용 체크 후 2분 인터락 시작.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgJudgeSpecSetting.cpp:986",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 186
+      }
+    },
+    {
+      "id": "system:221",
+      "log_type": "system",
+      "source_index": "221",
+      "category": "PLC 알람 설정",
+      "code": "800",
+      "message_template": "Check No BTM Alarm To Plc - 30 minute Interlock Start",
+      "tags": [],
+      "description": "BTM 알람 미사용 체크 후 30분 인터락 시작.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgJudgeSpecSetting.cpp:992",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 187
+      }
+    },
+    {
+      "id": "system:222",
+      "log_type": "system",
+      "source_index": "222",
+      "category": "PLC 알람 설정",
+      "code": "800",
+      "message_template": "UnCheck No Alarm To Plc",
+      "tags": [],
+      "description": "알람 미사용 체크 해제. BTM 설정 경로에서도 같은 문구 사용.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgJudgeSpecSetting.cpp:998",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 188
+      }
+    },
+    {
+      "id": "system:223",
+      "log_type": "system",
+      "source_index": "223",
+      "category": "PLC 알람 설정",
+      "code": "800",
+      "message_template": "Check No Alarm to Plc - 2 minute interlock Started",
+      "tags": [],
+      "description": "알람 미사용 체크 후 2분 인터락 시작.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgParamSetting.cpp:2381",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 189
+      }
+    },
+    {
+      "id": "system:224",
+      "log_type": "system",
+      "source_index": "224",
+      "category": "PLC 알람 설정",
+      "code": "800",
+      "message_template": "Check No Alarm to Plc - 30 minute interlock started",
+      "tags": [],
+      "description": "알람 미사용 체크 후 30분 인터락 시작.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgParamSetting.cpp:2387",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 190
+      }
+    },
+    {
+      "id": "system:225",
+      "log_type": "system",
+      "source_index": "225",
+      "category": "PLC 알람 설정",
+      "code": "800",
+      "message_template": "Extend : UnCheck No Alarm To Plc",
+      "tags": [],
+      "description": "연장 확인에서 알람 미사용 해제 선택.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · SlideInsDlg.cpp:4790~4848",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 191
+      }
+    },
+    {
+      "id": "system:226",
+      "log_type": "system",
+      "source_index": "226",
+      "category": "PLC 알람 설정",
+      "code": "800",
+      "message_template": "Extend : UnCheck No BTM Alarm To Plc",
+      "tags": [],
+      "description": "연장 확인에서 BTM 알람 미사용 해제 선택.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · SlideInsDlg.cpp:4790~4848",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 192
+      }
+    },
+    {
+      "id": "system:227",
+      "log_type": "system",
+      "source_index": "227",
+      "category": "PLC 알람 설정",
+      "code": "800",
+      "message_template": "Extend : Check No Alarm to PLC - 2 minute interlock started.",
+      "tags": [],
+      "description": "알람 미사용 유지 선택으로 2분 인터락 재시작.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · SlideInsDlg.cpp:4790~4848",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 193
+      }
+    },
+    {
+      "id": "system:228",
+      "log_type": "system",
+      "source_index": "228",
+      "category": "PLC 알람 설정",
+      "code": "800",
+      "message_template": "Extend : Check No BTM Alarm to PLC - 2 minute interlock started.",
+      "tags": [],
+      "description": "BTM 알람 미사용 유지 선택으로 2분 인터락 재시작.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · SlideInsDlg.cpp:4790~4848",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 194
+      }
+    },
+    {
+      "id": "system:229",
+      "log_type": "system",
+      "source_index": "229",
+      "category": "I/O / Air Blow",
+      "code": "500",
+      "message_template": "영역 감지 센서 감지",
+      "tags": [],
+      "description": "Area 센서 모드 감지되었을 때",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:370",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 195
+      }
+    },
+    {
+      "id": "system:230",
+      "log_type": "system",
+      "source_index": "230",
+      "category": "I/O / Air Blow",
+      "code": "500",
+      "message_template": "통지 모드 감지",
+      "tags": [],
+      "description": "통지 모드일 때, -Limit 으로 전부 이동",
+      "example": "영문 설정: Inspection Stop Mode Detected",
+      "recommended_action": null,
+      "source_note": "영문 문구 보완 · SlideInsDlg.cpp:393",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 196
+      }
+    },
+    {
+      "id": "system:231",
+      "log_type": "system",
+      "source_index": "231",
+      "category": "I/O / Air Blow",
+      "code": "500",
+      "message_template": "동작 모드 감지",
+      "tags": [],
+      "description": "동작 모드 입력 감지. 이전 모션 위치 복귀 처리 경로.",
+      "example": "영문 설정: Inspection Operation Mode Detected",
+      "recommended_action": null,
+      "source_note": "영문 문구 보완 · SlideInsDlg.cpp:409",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 197
+      }
+    },
+    {
+      "id": "system:232",
+      "log_type": "system",
+      "source_index": "232",
+      "category": "I/O / Air Blow",
+      "code": "500",
+      "message_template": "Air Blow Clean OK",
+      "tags": [],
+      "description": "센서 Air blow 동작(오토옵셋 중엔 작동 안 함)",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · DlgSystemIO.cpp:3406",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 198
+      }
+    },
+    {
+      "id": "system:233",
+      "log_type": "system",
+      "source_index": "233",
+      "category": "I/O / Air Blow",
+      "code": "9999",
+      "message_template": "[Air Shot] Manual Air Shot - Sensor %d %s",
+      "tags": [
+        "Air Shot"
+      ],
+      "description": "수동 Air Shot 수행 시 센서 번호와 구분 문자열 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSensorAirBlow.cpp:177",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 199
+      }
+    },
+    {
+      "id": "system:234",
+      "log_type": "system",
+      "source_index": "234",
+      "category": "진단 / 테스트",
+      "code": "CODE_486",
+      "message_template": "[Sliding률 TrendData 모니터링] startDate:%.3lfm, endDate:%.3lfm // startDate를 0으로 초기화",
+      "tags": [
+        "Sliding률 TrendData 모니터링"
+      ],
+      "description": "그래프 표현 버그 모니터링 로그",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · DlgNewChartMonitor.cpp:2453",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 200
+      }
+    },
+    {
+      "id": "system:235",
+      "log_type": "system",
+      "source_index": "235",
+      "category": "진단 / 테스트",
+      "code": "0",
+      "message_template": "m_bAutoOffsetRunFlag(DecodePacket): %d",
+      "tags": [],
+      "description": "오토옵셋 플래그 기록(1일때 오토옵셋 실행 조건)",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2155",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 201
+      }
+    },
+    {
+      "id": "system:236",
+      "log_type": "system",
+      "source_index": "236",
+      "category": "진단 / 테스트",
+      "code": "CODE_486",
+      "message_template": "[Fat-Edge TrendData 모니터링] startDate:%.3lfm, endDate:%.3lfm // startDate를 0으로 초기화",
+      "tags": [
+        "Fat-Edge TrendData 모니터링"
+      ],
+      "description": "Fat-Edge 트렌드 조회 시작 미터를 0으로 보정할 때 조회 범위 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgNewChartMonitor.cpp:2509",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 202
+      }
+    },
+    {
+      "id": "system:237",
+      "log_type": "system",
+      "source_index": "237",
+      "category": "진단 / 테스트",
+      "code": "503",
+      "message_template": "[PLC][TEST] ON (recover %.1f sec)",
+      "tags": [
+        "PLC",
+        "TEST"
+      ],
+      "description": "PLC 테스트 읽기 성공으로 상태 ON 전환. 이전 기록이 있으면 복구 경과 초 포함.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:1843",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 203
+      }
+    },
+    {
+      "id": "system:238",
+      "log_type": "system",
+      "source_index": "238",
+      "category": "진단 / 테스트",
+      "code": "503",
+      "message_template": "[PLC][TEST] OFF (%ld, after %.1f sec)",
+      "tags": [
+        "PLC",
+        "TEST"
+      ],
+      "description": "PLC 테스트 읽기 실패로 상태 OFF 전환. 오류 코드와 이전 성공 후 경과 초 포함.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:1868",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 204
+      }
+    },
+    {
+      "id": "system:239",
+      "log_type": "system",
+      "source_index": "239",
+      "category": "진단 / 테스트",
+      "code": "503",
+      "message_template": "[PLC] RW Meter OK",
+      "tags": [
+        "PLC"
+      ],
+      "description": "RW 미터 갱신이 정상으로 확인되거나 재개됨.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:1926",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 205
+      }
+    },
+    {
+      "id": "system:240",
+      "log_type": "system",
+      "source_index": "240",
+      "category": "진단 / 테스트",
+      "code": "503",
+      "message_template": "[PLC] RW Meter Stop",
+      "tags": [
+        "PLC"
+      ],
+      "description": "검사 중 RW 미터 갱신 정지 감지.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:1936",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 206
+      }
+    },
+    {
+      "id": "system:241",
+      "log_type": "system",
+      "source_index": "241",
+      "category": "진단 / 테스트",
+      "code": "9999",
+      "message_template": "[Data rate] Skip (Foil run assumed): TotalData=0, Coat=%.1fm, Cut=%.1fm, Start=%.1fm",
+      "tags": [
+        "Data rate"
+      ],
+      "description": "WA 검사율 계산에서 데이터 0건인 무지 주행 추정 구간을 계산에서 제외.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:15068",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 207
+      }
+    },
+    {
+      "id": "system:242",
+      "log_type": "system",
+      "source_index": "242",
+      "category": "진단 / 테스트",
+      "code": "9999",
+      "message_template": "[Data rate] Highest Loss Sensor: C%d-S%d, Coat=%.1fm, OK DataCnt %d(total %d - Except %d), DataRate %.1f%%",
+      "tags": [
+        "Data rate"
+      ],
+      "description": "WA에서 데이터 손실이 가장 큰 Client/Sensor, 코팅 거리, 유효/전체/제외 건수 및 데이터율 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:15156",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 208
+      }
+    },
+    {
+      "id": "system:243",
+      "log_type": "system",
+      "source_index": "243",
+      "category": "진단 / 테스트",
+      "code": "9999",
+      "message_template": "[TEST] AutoStartDelayTime 호출 - Pos=%.1f, Speed=%.1f, Offset=%d",
+      "tags": [
+        "TEST"
+      ],
+      "description": "Auto Start 지연 테스트 함수 호출 시 거리·속도·오프셋 기록. 정상 생산 자동 신호와 구분.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:15236",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 209
+      }
+    },
+    {
+      "id": "system:244",
+      "log_type": "system",
+      "source_index": "244",
+      "category": "진단 / 테스트",
+      "code": "9999",
+      "message_template": "[TEST] Send PLC Signal ON (address: %s)",
+      "tags": [
+        "TEST"
+      ],
+      "description": "PLC 테스트 주소에 ON 신호 쓰기 요청.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:15253",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 210
+      }
+    },
+    {
+      "id": "system:245",
+      "log_type": "system",
+      "source_index": "245",
+      "category": "진단 / 테스트",
+      "code": "9999",
+      "message_template": "[TEST] Send PLC Signal OFF (address: %s)",
+      "tags": [
+        "TEST"
+      ],
+      "description": "PLC 테스트 주소에 OFF 신호 쓰기 요청.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:15263",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 211
+      }
+    },
+    {
+      "id": "system:246",
+      "log_type": "system",
+      "source_index": "246",
+      "category": "진단 / 테스트",
+      "code": "999",
+      "message_template": "[Watchdog] UI 무응답에서 복구됨 (덤프 생성됨)",
+      "tags": [
+        "Watchdog"
+      ],
+      "description": "UI 무응답으로 덤프 생성 후 UI가 다시 응답했을 때 복구 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · SlideInsDlg.cpp:93",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 212
+      }
+    },
+    {
+      "id": "system:247",
+      "log_type": "system",
+      "source_index": "247",
+      "category": "진단 / 테스트",
+      "code": "999",
+      "message_template": "[AGENT_CONNECT_STATUS] Alarm - File Missing or Status 0 over 60sec - Path: %s",
+      "tags": [
+        "AGENT_CONNECT_STATUS"
+      ],
+      "description": "Agent 연결상태 파일 누락 또는 0 상태가 60초 이상 지속되면 기록. 문구에 Alarm이 있지만 LOG_SYS 이벤트 경로.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · SlideInsDlg.cpp:5172",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 213
+      }
+    },
+    {
+      "id": "system:248",
+      "log_type": "system",
+      "source_index": "248",
+      "category": "진단 / 테스트",
+      "code": "999",
+      "message_template": "[SPC] 디스크 지연으로 기록 %ld건 유실",
+      "tags": [
+        "SPC"
+      ],
+      "description": "SPC 비동기 파일 기록 지연으로 유실된 기록 건수 알림.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · SPCManager.cpp:146",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 214
+      }
+    },
+    {
+      "id": "system:249",
+      "log_type": "system",
+      "source_index": "249",
+      "category": "진단 / 테스트",
+      "code": "105",
+      "message_template": "Start Encoder Pos : %d, Time : %d",
+      "tags": [],
+      "description": "엔코더 위치 변화 감지로 구동 상태 시작. 위치와 시간 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · SystemManager.cpp:49",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 215
+      }
+    },
+    {
+      "id": "system:250",
+      "log_type": "system",
+      "source_index": "250",
+      "category": "진단 / 테스트",
+      "code": "105",
+      "message_template": "Stop Encoder Pos : %d (Stall Duration: %d ms)",
+      "tags": [],
+      "description": "엔코더 위치 정체로 구동 상태 정지. 위치와 정체 시간(ms) 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · SystemManager.cpp:70",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 216
+      }
+    },
+    {
+      "id": "system:251",
+      "log_type": "system",
+      "source_index": "251",
+      "category": "진단 / 테스트",
+      "code": "119",
+      "message_template": "Cotting Gap Time : %.4f",
+      "tags": [],
+      "description": "Top/Back 코팅 ON 시간 차(초). 현재 호출이 LOG_SYS(msg, code, dTime) 3인자라 2인자 매크로와 불일치. 정상 출력 여부는 코드 수정/빌드 확인 필요.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgOpcView.cpp:313 / DlgSystemIO.cpp:4232 / LogMacro.h:19",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 217
+      }
+    },
+    {
+      "id": "system:252",
+      "log_type": "system",
+      "source_index": "252",
+      "category": "진단 / 테스트",
+      "code": "503",
+      "message_template": "[PLC][TEST] ON",
+      "tags": [
+        "PLC",
+        "TEST"
+      ],
+      "description": "PLC 테스트 읽기 최초 성공 기록. 이전 성공 시각이 있으면 recover 초를 포함하는 변형 출력.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:1839",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 218
+      }
+    },
+    {
+      "id": "system:253",
+      "log_type": "system",
+      "source_index": "253",
+      "category": "진단 / 테스트",
+      "code": "503",
+      "message_template": "[PLC][TEST] OFF (%ld)",
+      "tags": [
+        "PLC",
+        "TEST"
+      ],
+      "description": "PLC 테스트 읽기 실패 기록. 이전 성공 시각이 없을 때 오류 코드만 포함.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · DlgSystemIO.cpp:1862",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 219
+      }
+    },
+    {
+      "id": "system:254",
+      "log_type": "system",
+      "source_index": "254",
+      "category": "기존 미출력 / 중복",
+      "code": "402",
+      "message_template": "Servo On End 수신",
+      "tags": [],
+      "description": "기존 중복 항목. Idx 74 참조.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "중복 · 정리 후 Idx 74와 동일 항목",
+      "reference_only": true,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 220
+      }
+    },
+    {
+      "id": "system:255",
+      "log_type": "system",
+      "source_index": "255",
+      "category": "기존 미출력 / 중복",
+      "code": "402",
+      "message_template": "test 성 로그. 오토옵셋 플래그 true이면 1, 아니면 0",
+      "tags": [],
+      "description": "기존 표의 설명형 문구. 현재 코드에 동일 이벤트 로그 문자열 없음.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "현재 Master 이벤트 출력 없음 · 기존 항목 보존",
+      "reference_only": true,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 221
+      }
+    },
+    {
+      "id": "system:256",
+      "log_type": "system",
+      "source_index": "256",
+      "category": "기존 미출력 / 중복",
+      "code": "402",
+      "message_template": "Alarm Reset End 수신",
+      "tags": [],
+      "description": "기존 중복 항목. Idx 76 참조.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "중복 · 정리 후 Idx 76와 동일 항목",
+      "reference_only": true,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 222
+      }
+    },
+    {
+      "id": "system:257",
+      "log_type": "system",
+      "source_index": "257",
+      "category": "기존 미출력 / 중복",
+      "code": "400",
+      "message_template": "Model Postion Save OK",
+      "tags": [],
+      "description": "기존 중복 항목. Idx 77 참조.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "중복 · 정리 후 Idx 77와 동일 항목",
+      "reference_only": true,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 223
+      }
+    },
+    {
+      "id": "system:258",
+      "log_type": "system",
+      "source_index": "258",
+      "category": "기존 미출력 / 중복",
+      "code": "402",
+      "message_template": "code_Sliding_Realtime_Data_Ack 수신",
+      "tags": [],
+      "description": "기존 중복 항목. Idx 78 참조.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "중복 · 정리 후 Idx 78와 동일 항목",
+      "reference_only": true,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 224
+      }
+    },
+    {
+      "id": "system:259",
+      "log_type": "system",
+      "source_index": "259",
+      "category": "기존 미출력 / 중복",
+      "code": "600",
+      "message_template": "Auto Offset 실행 중 Servo 이상 발생",
+      "tags": [],
+      "description": "현재는 LOG_ALARM(..., 600)으로 출력되는 알람 로그. 서버 이벤트로그에는 출력하지 않음. 서버_알람로그 시트는 이번 수정 대상에서 제외.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "현재 Master 이벤트 출력 없음 · 기존 항목 보존",
+      "reference_only": true,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 225
+      }
+    },
+    {
+      "id": "system:260",
+      "log_type": "system",
+      "source_index": "260",
+      "category": "기존 미출력 / 중복",
+      "code": "800",
+      "message_template": "지그 이동 시작",
+      "tags": [],
+      "description": "기존 중복 항목. Idx 154 참조.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "중복 · 정리 후 Idx 154와 동일 항목",
+      "reference_only": true,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 226
+      }
+    },
+    {
+      "id": "system:261",
+      "log_type": "system",
+      "source_index": "261",
+      "category": "기존 미출력 / 중복",
+      "code": "Debug_1",
+      "message_template": "Test Marking Start (MI), RW%d : %d, Start Signal : 1, Code : 601",
+      "tags": [],
+      "description": "현재 Sliding_Master 및 Shared 코드에 동일 이벤트 출력 호출 없음. 과거 문구를 참고용으로 보존.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "현재 Master 이벤트 출력 없음 · 기존 항목 보존",
+      "reference_only": true,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 227
+      }
+    },
+    {
+      "id": "system:262",
+      "log_type": "system",
+      "source_index": "262",
+      "category": "기존 미출력 / 중복",
+      "code": "Debug_1",
+      "message_template": "Test Marking End (MI), RW%d : %d, End Signal : 1, Code : 601",
+      "tags": [],
+      "description": "현재 Sliding_Master 및 Shared 코드에 동일 이벤트 출력 호출 없음. 과거 문구를 참고용으로 보존.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "현재 Master 이벤트 출력 없음 · 기존 항목 보존",
+      "reference_only": true,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 228
+      }
+    },
+    {
+      "id": "system:263",
+      "log_type": "system",
+      "source_index": "263",
+      "category": "기존 미출력 / 중복",
+      "code": "Move Inspect Pos",
+      "message_template": "자동 이동 검사 모드 - 자동 오프셋 동작 중... 검사 위치 이동 연기",
+      "tags": [],
+      "description": "현재 Sliding_Master 및 Shared 코드에 동일 이벤트 출력 호출 없음. 과거 문구를 참고용으로 보존.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "현재 Master 이벤트 출력 없음 · 기존 항목 보존",
+      "reference_only": true,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 229
+      }
+    },
+    {
+      "id": "system:264",
+      "log_type": "system",
+      "source_index": "264",
+      "category": "기존 미출력 / 중복",
+      "code": "Auto Offset",
+      "message_template": "자동 이동 검사 모드 - 검사 위치 이동 중... 자동 오프셋 기능 연기",
+      "tags": [],
+      "description": "현재 Sliding_Master 및 Shared 코드에 동일 이벤트 출력 호출 없음. 과거 문구를 참고용으로 보존.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "현재 Master 이벤트 출력 없음 · 기존 항목 보존",
+      "reference_only": true,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 230
+      }
+    },
+    {
+      "id": "system:265",
+      "log_type": "system",
+      "source_index": "265",
+      "category": "기존 미출력 / 중복",
+      "code": "Move Inspection Mode",
+      "message_template": "Move Inspection Position No. %d",
+      "tags": [],
+      "description": "현재 Sliding_Master 및 Shared 코드에 동일 이벤트 출력 호출 없음. 과거 문구를 참고용으로 보존.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "현재 Master 이벤트 출력 없음 · 기존 항목 보존",
+      "reference_only": true,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 231
+      }
+    },
+    {
+      "id": "system:266",
+      "log_type": "system",
+      "source_index": "266",
+      "category": "기존 미출력 / 중복",
+      "code": "Move Inspection Mode",
+      "message_template": "Moving Inspect Position End No. %d",
+      "tags": [],
+      "description": "현재 Sliding_Master 및 Shared 코드에 동일 이벤트 출력 호출 없음. 과거 문구를 참고용으로 보존.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "현재 Master 이벤트 출력 없음 · 기존 항목 보존",
+      "reference_only": true,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 232
+      }
+    },
+    {
+      "id": "system:267",
+      "log_type": "system",
+      "source_index": "267",
+      "category": "기존 미출력 / 중복",
+      "code": "Move Inspection Mode",
+      "message_template": "Moving Inspect Position Failed No. %d, Resend Moveing Inspect Posion",
+      "tags": [],
+      "description": "현재 Sliding_Master 및 Shared 코드에 동일 이벤트 출력 호출 없음. 과거 문구를 참고용으로 보존.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "현재 Master 이벤트 출력 없음 · 기존 항목 보존",
+      "reference_only": true,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 233
+      }
+    },
+    {
+      "id": "system:268",
+      "log_type": "system",
+      "source_index": "268",
+      "category": "기존 미출력 / 중복",
+      "code": "123",
+      "message_template": "InspectStartDlgUpdate(Inspect Start) : %d",
+      "tags": [],
+      "description": "기존 중복 항목. Idx 27 참조.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "중복 · 정리 후 Idx 27와 동일 항목",
+      "reference_only": true,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 234
+      }
+    },
+    {
+      "id": "system:269",
+      "log_type": "system",
+      "source_index": "269",
+      "category": "기존 미출력 / 중복",
+      "code": "0",
+      "message_template": "m_bAutoOffsetRunFlag(DecodingAutoOffset): %d",
+      "tags": [],
+      "description": "현재 Sliding_Master 및 Shared 코드에 동일 이벤트 출력 호출 없음. 과거 문구를 참고용으로 보존.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "현재 Master 이벤트 출력 없음 · 기존 항목 보존",
+      "reference_only": true,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 235
+      }
+    },
+    {
+      "id": "system:270",
+      "log_type": "system",
+      "source_index": "270",
+      "category": "기존 미출력 / 중복",
+      "code": "700",
+      "message_template": "[OPC UA] Connect Reconnect",
+      "tags": [
+        "OPC UA"
+      ],
+      "description": "현재 OPC UA 재접속 시도는 있으나 이 문구의 이벤트 출력 호출은 없음.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "현재 Master 이벤트 출력 없음 · 기존 항목 보존",
+      "reference_only": true,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 236
+      }
+    },
+    {
+      "id": "system:271",
+      "log_type": "system",
+      "source_index": "271",
+      "category": "기존 미출력 / 중복",
+      "code": "900",
+      "message_template": "[KEYENCE] Connect Fail / ip, port",
+      "tags": [
+        "KEYENCE"
+      ],
+      "description": "현재 코드에 이 문구의 이벤트 출력 호출 없음. Keyenc PLC 전송 실패/재접속은 별도 시스템 파일 로그(999) 참조.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "현재 Master 이벤트 출력 없음 · 기존 항목 보존",
+      "reference_only": true,
+      "source": {
+        "sheet": "시스템로그",
+        "row": 237
+      }
+    },
+    {
+      "id": "system_developer:2",
+      "log_type": "system_developer",
+      "source_index": "2",
+      "category": "INFO",
+      "code": "33",
+      "message_template": "Map 파일 불러오기 완료.",
+      "tags": [],
+      "description": "map 파일 불러왔을 때",
+      "example": "영문 설정: Map File Loaded.",
+      "recommended_action": null,
+      "source_note": "영문 문구 보완 · DlgSystemIO.cpp:5194",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그 개발자용",
+        "row": 1
+      }
+    },
+    {
+      "id": "system_developer:3",
+      "log_type": "system_developer",
+      "source_index": "3",
+      "category": "INFO",
+      "code": "33",
+      "message_template": "Map 파일을 찾지 못했습니다.\\n파일이 폴더에 있는지 확인 바랍니다.\\n경로 : %s",
+      "tags": [],
+      "description": "map 파일 불러오기 실패했을 때(PLC - 자재코드 MAP)",
+      "example": "영문 설정: Map file was not found.\\nPlease check whether the file exists in the folder.\\nPath: %s",
+      "recommended_action": null,
+      "source_note": "영문 문구 보완 · DlgSystemIO.cpp:5204",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그 개발자용",
+        "row": 2
+      }
+    },
+    {
+      "id": "system_developer:4",
+      "log_type": "system_developer",
+      "source_index": "4",
+      "category": "INFO",
+      "code": "600",
+      "message_template": "%s Model Loaded",
+      "tags": [],
+      "description": "모델 변경시 로드된 모델 이름 기록",
+      "example": "N2.2-100 Model Loaded",
+      "recommended_action": null,
+      "source_note": "확인 · DlgParamSetting.cpp:838",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그 개발자용",
+        "row": 3
+      }
+    },
+    {
+      "id": "system_developer:5",
+      "log_type": "system_developer",
+      "source_index": "5",
+      "category": "INFO",
+      "code": "999",
+      "message_template": "ClearMemory Start!!",
+      "tags": [],
+      "description": "오후 1시마다 ClearMemory 기능 실행",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:1046",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그 개발자용",
+        "row": 4
+      }
+    },
+    {
+      "id": "system_developer:6",
+      "log_type": "system_developer",
+      "source_index": "6",
+      "category": "INFO",
+      "code": "999",
+      "message_template": "File 'RAMMap.exe' does not exist.",
+      "tags": [],
+      "description": "Clearmemory에 필요한 Rammap.exe 파일이 존재하지 않음",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:4231",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그 개발자용",
+        "row": 5
+      }
+    },
+    {
+      "id": "system_developer:7",
+      "log_type": "system_developer",
+      "source_index": "7",
+      "category": "INFO",
+      "code": "999",
+      "message_template": "Clear Memory Exit",
+      "tags": [],
+      "description": "Clearmemory 종료",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:4245",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그 개발자용",
+        "row": 6
+      }
+    },
+    {
+      "id": "system_developer:11",
+      "log_type": "system_developer",
+      "source_index": "11",
+      "category": "INFO",
+      "code": "50",
+      "message_template": "서버 시간 전송: %d-%02d-%02d %02d:%02d:%02d",
+      "tags": [],
+      "description": "클라이언트에 전송하는 서버 날짜와 시각 기록.",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "추가 · SlideInsDlg.cpp:4016",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그 개발자용",
+        "row": 7
+      }
+    },
+    {
+      "id": "system_developer:27",
+      "log_type": "system_developer",
+      "source_index": "27",
+      "category": "INSPECT",
+      "code": "123",
+      "message_template": "InspectStartDlgUpdate(Inspect Start) : %d",
+      "tags": [],
+      "description": "[시작 3] 검사 가능 상태가 TRUE로 전환될 때 1회 출력 후 Client 검사 ON 전송. 약 1초 주기로 상태 확인.\n조건: 코팅 검사 ON, Unwinder 사용 시 준비 완료, Auto Offset 미실행.\n0/1을 매번 출력하는 로그가 아님. PLC 검사상태 보고와 초기 Skip 완료는 별도.",
+      "example": "InspectStartDlgUpdate(Inspect Start) : 1",
+      "recommended_action": null,
+      "source_note": "수정 · SlideInsDlg.cpp:2940",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그 개발자용",
+        "row": 8
+      }
+    },
+    {
+      "id": "system_developer:45",
+      "log_type": "system_developer",
+      "source_index": "45",
+      "category": "UNWINDER",
+      "code": "333P",
+      "message_template": "[UNWINDER] Cutting Signal ON (%.1f M)",
+      "tags": [
+        "UNWINDER"
+      ],
+      "description": "[OC1] 언와인더 커팅신호 ON, 리와인더 거리 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · DlgSystemIO.cpp:16091",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그 개발자용",
+        "row": 9
+      }
+    },
+    {
+      "id": "system_developer:46",
+      "log_type": "system_developer",
+      "source_index": "46",
+      "category": "UNWINDER",
+      "code": "333P",
+      "message_template": "[UNWINDER] Cutting Signal OFF (Just Log) (%.1f M)",
+      "tags": [
+        "UNWINDER"
+      ],
+      "description": "[OC1] 언와인더 커팅신호 OFF, 리와인더 거리 기록, PLC OFF 시점 확인용",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · DlgSystemIO.cpp:16102",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그 개발자용",
+        "row": 10
+      }
+    },
+    {
+      "id": "system_developer:47",
+      "log_type": "system_developer",
+      "source_index": "47",
+      "category": "UNWINDER",
+      "code": "333P",
+      "message_template": "[UNWINDER] Cutting Signal OFF (Real Flag) (%.1f M)",
+      "tags": [
+        "UNWINDER"
+      ],
+      "description": "[OC1] 언와인더 커팅신호 OFF, 리와인더 거리 기록, 라벨 태깅 예외처리 구간 확인용",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · DlgSystemIO.cpp:16116",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그 개발자용",
+        "row": 11
+      }
+    },
+    {
+      "id": "system_developer:48",
+      "log_type": "system_developer",
+      "source_index": "48",
+      "category": "UNWINDER",
+      "code": "333P",
+      "message_template": "Sample Coating Signal ON (%.1f M)",
+      "tags": [],
+      "description": "[OC1] AC1 Sample Coating (조건조정신호) ON일 때 , 리와인더 거리 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · DlgSystemIO.cpp:16134",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그 개발자용",
+        "row": 12
+      }
+    },
+    {
+      "id": "system_developer:49",
+      "log_type": "system_developer",
+      "source_index": "49",
+      "category": "UNWINDER",
+      "code": "333P",
+      "message_template": "Sample Coating Signal OFF (%.1f M)",
+      "tags": [],
+      "description": "[OC1] AC1 Sample Coating (조건조정신호) OFF일 때 , 리와인더 거리 기록",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · DlgSystemIO.cpp:16145",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그 개발자용",
+        "row": 13
+      }
+    },
+    {
+      "id": "system_developer:50",
+      "log_type": "system_developer",
+      "source_index": "50",
+      "category": "UNWINDER",
+      "code": "333P",
+      "message_template": "Back Head OK Signal ON (Push Button) (%.1f M)",
+      "tags": [],
+      "description": "[OC1] Back Head 버튼 눌렀을 때 ON",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · DlgSystemIO.cpp:16163",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그 개발자용",
+        "row": 14
+      }
+    },
+    {
+      "id": "system_developer:51",
+      "log_type": "system_developer",
+      "source_index": "51",
+      "category": "UNWINDER",
+      "code": "333P",
+      "message_template": "Back Head OK Signal OFF (Just Log) (%.1f M)",
+      "tags": [],
+      "description": "[OC1] Back Head 버튼 눌리지 않았을 때",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · DlgSystemIO.cpp:16173",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그 개발자용",
+        "row": 15
+      }
+    },
+    {
+      "id": "system_developer:52",
+      "log_type": "system_developer",
+      "source_index": "52",
+      "category": "UNWINDER",
+      "code": "333P",
+      "message_template": "Back Head OK Signal OFF (Real Flag_Lot) (%.1f M)",
+      "tags": [],
+      "description": "[OC1] Back Head 버튼 백헤드 버튼이 랏 끝부분에서 눌렸을 때",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · DlgSystemIO.cpp:16190",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그 개발자용",
+        "row": 16
+      }
+    },
+    {
+      "id": "system_developer:53",
+      "log_type": "system_developer",
+      "source_index": "53",
+      "category": "UNWINDER",
+      "code": "333P",
+      "message_template": "Back Head OK Signal OFF (Real Flag) (%.1f M)",
+      "tags": [],
+      "description": "[OC1] Back Head 버튼 랏 끝부분에서 눌리지 않았을 때",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · DlgSystemIO.cpp:16201",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그 개발자용",
+        "row": 17
+      }
+    },
+    {
+      "id": "system_developer:78",
+      "log_type": "system_developer",
+      "source_index": "78",
+      "category": "MOTION",
+      "code": "402",
+      "message_template": "code_Sliding_Realtime_Data_Ack 수신",
+      "tags": [],
+      "description": "서버 클라 정보 더블클릭시 실시간 정보 받아오기 수신",
+      "example": null,
+      "recommended_action": null,
+      "source_note": "확인 · SlideInsDlg.cpp:2738",
+      "reference_only": false,
+      "source": {
+        "sheet": "시스템로그 개발자용",
+        "row": 18
+      }
+    },
+    {
+      "id": "alarm:1",
+      "log_type": "alarm",
+      "source_index": "1",
+      "category": "PD / 품질·라벨",
+      "code": "100",
+      "message_template": "[LABEL] START/END : Single / (Back/Top/FatEdge) / Pos / (Shot/Unshot) / [Lane, Sensor]",
+      "tags": [
+        "LABEL"
+      ],
+      "description": "Single Alarm 발생 시작/종료 시 불량타입, 위치, 라벨샷 사용, 레인, 클라이언트, 센서",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 3
+      }
+    },
+    {
+      "id": "alarm:2",
+      "log_type": "alarm",
+      "source_index": "2",
+      "category": "PD / 품질·라벨",
+      "code": "101",
+      "message_template": "[LABEL] START/END : Continue / (Back/Top/FatEdge) / Pos / (Shot/Unshot) / [Lane, Sensor]",
+      "tags": [
+        "LABEL"
+      ],
+      "description": "Continue Alarm 발생 시작/종료 시 불량타입, 위치, 라벨샷 사용, 레인, 클라이언트, 센서",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 4
+      }
+    },
+    {
+      "id": "alarm:3",
+      "log_type": "alarm",
+      "source_index": "3",
+      "category": "PD / 품질·라벨",
+      "code": "102",
+      "message_template": "[LABEL] START/END : Exceeding / (Back/Top/FatEdge) / Pos / (Shot/Unshot) / [Lane, Sensor]",
+      "tags": [
+        "LABEL"
+      ],
+      "description": "Exceeding Alarm 발생 시작/종료 시 불량타입, 위치, 라벨샷 사용, 레인, 클라이언트, 센서",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 5
+      }
+    },
+    {
+      "id": "alarm:4",
+      "log_type": "alarm",
+      "source_index": "4",
+      "category": "FOIL / 주름·떨림",
+      "code": "500",
+      "message_template": "[FOIL] Wrinkle/Tremble Error DieOpen (Sensor)",
+      "tags": [
+        "FOIL"
+      ],
+      "description": "주름이나 떨림이 관리자 설정창에서 설정한 파라미터 갯수 이상이 나왔을 경우 / 다이 오픈",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 6
+      }
+    },
+    {
+      "id": "alarm:5",
+      "log_type": "alarm",
+      "source_index": "5",
+      "category": "FOIL / 주름·떨림",
+      "code": "501",
+      "message_template": "[FOIL] Wrinkle/Tremble Error PopUp Alarm(Sensor)",
+      "tags": [
+        "FOIL"
+      ],
+      "description": "주름이나 떨림이 관리자 설정창에서 설정한 파라미터 갯수 이상이 나왔을 경우 / 팝업 알람과 로그 남김",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 7
+      }
+    },
+    {
+      "id": "alarm:6",
+      "log_type": "alarm",
+      "source_index": "6",
+      "category": "BM / 검사·프레임",
+      "code": "213",
+      "message_template": "[BM] START/END : INSPECTION NOT RUNNING DURING PRODUCTION [Lane, Client]",
+      "tags": [
+        "BM"
+      ],
+      "description": "생산중인데 검사를 안할때",
+      "example": null,
+      "recommended_action": "생산중이 아닌데 촬상하고 있는지 확인 필요",
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 8
+      }
+    },
+    {
+      "id": "alarm:7",
+      "log_type": "alarm",
+      "source_index": "7",
+      "category": "BM / 검사·프레임",
+      "code": "214",
+      "message_template": "[BM] START/END : INSPECTION RUNNING WITHOUT PRODUCTION [Lane, Client]",
+      "tags": [
+        "BM"
+      ],
+      "description": "생산중이 아닌데 검사를 할때",
+      "example": null,
+      "recommended_action": "생산중일때 촬상을 안하고있는지 확인 필요",
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 9
+      }
+    },
+    {
+      "id": "alarm:8",
+      "log_type": "alarm",
+      "source_index": "8",
+      "category": "BM / 검사·프레임",
+      "code": "212",
+      "message_template": "[BM] START/END : CLIENT PROGRAM FRAME COUNT ERROR(50ea) [Client]",
+      "tags": [
+        "BM"
+      ],
+      "description": "프레임 카운트 알람(클라이언트 별 프레임 맞지 않을 때)",
+      "example": null,
+      "recommended_action": "클라이언트 프로그램 재실행, 데이터 확인",
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 10
+      }
+    },
+    {
+      "id": "alarm:9",
+      "log_type": "alarm",
+      "source_index": "9",
+      "category": "BM / 센서",
+      "code": "201",
+      "message_template": "[BM] START/END : SENSOR NOT CONNECTION [Sensor]",
+      "tags": [
+        "BM"
+      ],
+      "description": "고게이터(센서) 연결상태 알람",
+      "example": null,
+      "recommended_action": "고케이터(센서) 연결상태 확인",
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 11
+      }
+    },
+    {
+      "id": "alarm:10",
+      "log_type": "alarm",
+      "source_index": "10",
+      "category": "BM / 센서",
+      "code": "216",
+      "message_template": "[BM] START/END : SENSOR ALIGN ERROR [Sensor]",
+      "tags": [
+        "BM"
+      ],
+      "description": "Sensor Align 에러 시 알람",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 12
+      }
+    },
+    {
+      "id": "alarm:11",
+      "log_type": "alarm",
+      "source_index": "11",
+      "category": "BM / 통신·연결",
+      "code": "202",
+      "message_template": "[BM] START/END : PLC NOT CONNECTION",
+      "tags": [
+        "BM"
+      ],
+      "description": "PLC 연결 끊김 알람",
+      "example": null,
+      "recommended_action": "PLC 연결상태 확인, 랜선/네트워크 확인",
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 13
+      }
+    },
+    {
+      "id": "alarm:12",
+      "log_type": "alarm",
+      "source_index": "12",
+      "category": "BM / 통신·연결",
+      "code": "203",
+      "message_template": "[BM] START/END : IO NOT CONNECTION",
+      "tags": [
+        "BM"
+      ],
+      "description": "I/O 연결 상태 알람(아진 보드 연결 확인)",
+      "example": null,
+      "recommended_action": "아진 보드 연결 확인",
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 14
+      }
+    },
+    {
+      "id": "alarm:13",
+      "log_type": "alarm",
+      "source_index": "13",
+      "category": "BM / 통신·연결",
+      "code": "210",
+      "message_template": "[BM] START/END : CLIENT PROGRAM NOT CONNECTION [Client]",
+      "tags": [
+        "BM"
+      ],
+      "description": "클라이언트 연결 상태 알람",
+      "example": null,
+      "recommended_action": "클라이언트 프로그램 실행상태 확인",
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 15
+      }
+    },
+    {
+      "id": "alarm:14",
+      "log_type": "alarm",
+      "source_index": "14",
+      "category": "BM / 모션·지그",
+      "code": "204",
+      "message_template": "[BM] START/END : SERVO MOTION NOT CONNECTION [Sensor]",
+      "tags": [
+        "BM"
+      ],
+      "description": "모션 연결 상태 알람(센서 서보)",
+      "example": null,
+      "recommended_action": "모션 연결 상태 확인",
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 16
+      }
+    },
+    {
+      "id": "alarm:15",
+      "log_type": "alarm",
+      "source_index": "15",
+      "category": "BM / 모션·지그",
+      "code": "205",
+      "message_template": "[BM] START/END : SERVO_MOTION ALARM ON",
+      "tags": [
+        "BM"
+      ],
+      "description": "모션 알람 상태가 ON일 때 알람",
+      "example": null,
+      "recommended_action": "모터의 알람 상태를 확인",
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 17
+      }
+    },
+    {
+      "id": "alarm:16",
+      "log_type": "alarm",
+      "source_index": "16",
+      "category": "BM / 모션·지그",
+      "code": "206",
+      "message_template": "[BM] START/END : MOTION DIFF(CMD / ACT)",
+      "tags": [
+        "BM"
+      ],
+      "description": "모션 명령위치와 현재위치가 맞지 않을 때 알람",
+      "example": null,
+      "recommended_action": "명령위치와 현재위치 확인",
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 18
+      }
+    },
+    {
+      "id": "alarm:17",
+      "log_type": "alarm",
+      "source_index": "17",
+      "category": "BM / 모션·지그",
+      "code": "207",
+      "message_template": "[BM] START/END : MOTION HOME CHECK",
+      "tags": [
+        "BM"
+      ],
+      "description": "모션 원점 상태 알람",
+      "example": null,
+      "recommended_action": "해당 모션의 원점 초기화 상태를 확인",
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 19
+      }
+    },
+    {
+      "id": "alarm:18",
+      "log_type": "alarm",
+      "source_index": "18",
+      "category": "BM / 모션·지그",
+      "code": "215",
+      "message_template": "[BM] START/END : MODEL POSITION MOVE TIMEOUT",
+      "tags": [
+        "BM"
+      ],
+      "description": "모델위치 이동시 타임아웃 되었을 때",
+      "example": null,
+      "recommended_action": "모델위치 이동 완료 했는지 확인 필요",
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 20
+      }
+    },
+    {
+      "id": "alarm:19",
+      "log_type": "alarm",
+      "source_index": "19",
+      "category": "BM / 모션·지그",
+      "code": "211",
+      "message_template": "[BM] START/END : CAL JIG MOTION ERROR",
+      "tags": [
+        "BM"
+      ],
+      "description": "Cal Jig 모션 알람",
+      "example": null,
+      "recommended_action": "I/O 알람상태 확인",
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 21
+      }
+    },
+    {
+      "id": "alarm:20",
+      "log_type": "alarm",
+      "source_index": "20",
+      "category": "BM / 공압",
+      "code": "200",
+      "message_template": "[BM] START/END : AIR PRESSURE CHECK",
+      "tags": [
+        "BM"
+      ],
+      "description": "Air Pressure 인식되었을 때 알람",
+      "example": null,
+      "recommended_action": "공압 상태 확인",
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 22
+      }
+    },
+    {
+      "id": "alarm:21",
+      "log_type": "alarm",
+      "source_index": "21",
+      "category": "BM / 저장장치",
+      "code": "208",
+      "message_template": "[BM] START/END : CLIENT HDD NOT CONNECTION",
+      "tags": [
+        "BM"
+      ],
+      "description": "슬라이딩 HDD 연결 상태 알람",
+      "example": null,
+      "recommended_action": "클라이언트 PC 연결 상태 확인",
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 23
+      }
+    },
+    {
+      "id": "alarm:22",
+      "log_type": "alarm",
+      "source_index": "22",
+      "category": "BM / 저장장치",
+      "code": "209",
+      "message_template": "[BM] START/END : CLIENT HDD FULL(90%)",
+      "tags": [
+        "BM"
+      ],
+      "description": "HDD 용량 체크: 90% 이상일 때 알람",
+      "example": null,
+      "recommended_action": "해당 클라이언트 HDD 용량 확인",
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 24
+      }
+    },
+    {
+      "id": "alarm:23",
+      "log_type": "alarm",
+      "source_index": "23",
+      "category": "AUTO OFFSET",
+      "code": "300",
+      "message_template": "[AUTO OFFSET] AutoOffset Start : Servo Error",
+      "tags": [
+        "AUTO OFFSET"
+      ],
+      "description": "오토옵셋 step1 일 때, Servo 상태 확인하여 off일때 로그 남김",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 25
+      }
+    },
+    {
+      "id": "alarm:24",
+      "log_type": "alarm",
+      "source_index": "24",
+      "category": "AUTO OFFSET",
+      "code": "301",
+      "message_template": "[AUTO OFFSET] AutoOffset Start : T/Center Error",
+      "tags": [
+        "AUTO OFFSET"
+      ],
+      "description": "T/Center Error로 AutoOffset 실행",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 26
+      }
+    },
+    {
+      "id": "alarm:25",
+      "log_type": "alarm",
+      "source_index": "25",
+      "category": "AUTO OFFSET",
+      "code": "302",
+      "message_template": "[AUTO OFFSET] T/Center Error Count \\n %d / %d / %d / %d / %d / %d / %d / %d",
+      "tags": [
+        "AUTO OFFSET"
+      ],
+      "description": "T/Center Error일 때 Lane별 Spec Out 갯수",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 27
+      }
+    },
+    {
+      "id": "alarm:26",
+      "log_type": "alarm",
+      "source_index": "26",
+      "category": "MARKING",
+      "code": "400",
+      "message_template": "[MARKING] START/END : RW / LOTID / Pos / Type / Flag",
+      "tags": [
+        "MARKING"
+      ],
+      "description": "미쯔비시 - 마킹시작위치:: 리와인더 번호/랏아이디/마킹 시작위치/마킹코드",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 28
+      }
+    },
+    {
+      "id": "alarm:28",
+      "log_type": "alarm",
+      "source_index": "28",
+      "category": "MARKING",
+      "code": "402",
+      "message_template": "[MARKING] START/END : LANE / (TOP/BACK) / LOTID / Pos / Type / Flag",
+      "tags": [
+        "MARKING"
+      ],
+      "description": "미쯔비시(레인별) - 마킹시작위치:: 레인별/topback구분/랏아이디/마킹 시작위치/마킹코드/플래그",
+      "example": null,
+      "recommended_action": null,
+      "source_note": null,
+      "reference_only": false,
+      "source": {
+        "sheet": "알람로그",
+        "row": 29
+      }
+    }
+  ]
+}
