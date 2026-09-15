@@ -17,6 +17,7 @@ def initialize():
 
 def run_sequence(chain):
     uploaded_file, encoding = view.render_upload()
+    view.render_notice()
     entries = None
     parsed_json = None
     if uploaded_file is not None:
@@ -29,20 +30,42 @@ def run_sequence(chain):
         else:
             view.render_parse_result(entries, detected_encoding, parsed_json)
 
-    question, requested = view.render_analysis_input()
+    question, requested, stopped = view.render_analysis_input()
+    if stopped:
+        view.show_warning("로그 분석을 중지했습니다.")
+        return
+
     if not requested:
+        completed_result = view.stored_analysis_result()
+        if completed_result:
+            view.render_analysis_result(completed_result)
         return
 
     if uploaded_file is None:
-        view.show_warning("로그 파일을 업로드하세요.")
+        view.finish_analysis()
+        view.queue_notice("warning", "로그 파일을 업로드하세요.")
+        view.rerun()
     elif not question:
-        view.show_warning("질문을 입력하세요.")
+        view.finish_analysis()
+        view.queue_notice("warning", "질문을 입력하세요.")
+        view.rerun()
     elif not entries or not any(entry.raw.strip() for entry in entries):
-        view.show_warning("읽을 수 있는 로그 내용이 필요합니다. 파일과 인코딩을 확인하세요.")
+        view.finish_analysis()
+        view.queue_notice("warning", "읽을 수 있는 로그 내용이 필요합니다. 파일과 인코딩을 확인하세요.")
+        view.rerun()
     else:
-        with view.analysis_progress():
-            result = chain.invoke({"log": parsed_json, "question": question})
-        view.render_analysis_result(result.content)
+        try:
+            with view.analysis_progress():
+                content = view.render_analysis_stream(
+                    chain.stream({"log": parsed_json, "question": question})
+                )
+        except Exception as exc:
+            view.finish_analysis()
+            view.queue_notice("error", f"로그 분석 중 오류가 발생했습니다: {exc}")
+            view.rerun()
+        else:
+            view.finish_analysis(content)
+            view.rerun()
 
 
 def main():
